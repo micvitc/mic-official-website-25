@@ -64,22 +64,60 @@ const MeetTheTeamPage: React.FC = () => {
 
       <div className="flex space-x-4 mb-8 relative z-10">
         <button
-          className={`font-press-start w-[343px] h-[79px] flex items-center justify-center rounded-xl border-2 border-black text-[24px] leading-[163%] shadow-lg transform transition-transform duration-200
-            ${view === 'board' ? 'bg-[#FFE396] text-black scale-105' : 'bg-yellow-300 text-black'}
-          `}
-          style={{ fontWeight: '400', letterSpacing: 0 }}
+          className={`relative w-[345px] h-[81px] flex items-center justify-center border-none bg-transparent p-0 focus:outline-none transition-all duration-1000`}
           onClick={() => setView('board')}
+          aria-pressed={view === 'board'}
         >
-          BOARD
+          {/* Gold SVG (active) */}
+          <img
+            src="/images/button-gold.svg"
+            alt="Board Button Gold Background"
+            className={`absolute inset-0 w-full h-full pointer-events-none select-none transition-opacity duration-1000 ${view === 'board' ? 'opacity-100' : 'opacity-0'}`}
+            draggable="false"
+            aria-hidden="true"
+          />
+          {/* Peach SVG (inactive) */}
+          <img
+            src="/images/button-peach.svg"
+            alt="Board Button Peach Background"
+            className={`absolute inset-0 w-full h-full pointer-events-none select-none transition-opacity duration-1000 ${view === 'board' ? 'opacity-0' : 'opacity-100'}`}
+            draggable="false"
+            aria-hidden="true"
+          />
+          <span
+            className="font-press-start text-[24px] leading-[163%] text-black z-10 transition-all duration-1000"
+            style={{ fontWeight: 400, letterSpacing: 0 }}
+          >
+            BOARD
+          </span>
         </button>
         <button
-          className={`font-press-start w-[343px] h-[79px] flex items-center justify-center rounded-xl border-2 border-black text-[24px] leading-[163%] shadow-lg transform transition-transform duration-200
-            ${view === 'departments' ? 'bg-[#C0F3F9] text-black scale-105' : 'bg-green-300 text-black'}
-          `}
-          style={{ fontWeight: '400', letterSpacing: 0 }}
+          className={`relative w-[345px] h-[81px] flex items-center justify-center border-none bg-transparent p-0 focus:outline-none transition-all duration-1000`}
           onClick={() => setView('departments')}
+          aria-pressed={view === 'departments'}
         >
-          DEPARTMENTS
+          {/* Gold SVG (active) */}
+          <img
+            src="/images/button-gold.svg"
+            alt="Departments Button Gold Background"
+            className={`absolute inset-0 w-full h-full pointer-events-none select-none transition-opacity duration-1000 ${view === 'departments' ? 'opacity-100' : 'opacity-0'}`}
+            draggable="false"
+            aria-hidden="true"
+          />
+          {/* Peach SVG (inactive) */}
+          <img
+            src="/images/button-peach.svg"
+            alt="Departments Button Peach Background"
+            className={`absolute inset-0 w-full h-full pointer-events-none select-none transition-opacity duration-1000 ${view === 'departments' ? 'opacity-0' : 'opacity-100'}`}
+            draggable="false"
+            aria-hidden="true"
+          />
+          <span
+            className="font-press-start text-[24px] leading-[163%] text-black z-10 transition-all duration-1000"
+            style={{ fontWeight: 400, letterSpacing: 0 }}
+          >
+            DEPARTMENTS
+          </span>
         </button>
       </div>
 
