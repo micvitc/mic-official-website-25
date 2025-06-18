@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import TeamMemberCard from './components/TeamMemberCard';
+import PresidentCard from './components/PresidentCard';
 
 const MeetTheTeamPage: React.FC = () => {
   const [view, setView] = useState<'board' | 'departments'>('board');
@@ -125,7 +126,7 @@ const MeetTheTeamPage: React.FC = () => {
         <div className="flex flex-col items-center space-y-8 relative z-10">
           {/* President, Vice-President, Management Sec */}
           <div className="flex justify-center space-x-8">
-            <TeamMemberCard role="President" name="NAME" color="bg-pink-300" />
+            <PresidentCard name="GALI ANNA" />
             <TeamMemberCard role="Vice-President" name="NAME" color="bg-blue-300" />
             <TeamMemberCard role="Management Sec" name="NAME" color="bg-green-300" />
           </div>
