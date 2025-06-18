@@ -64,17 +64,19 @@ const MeetTheTeamPage: React.FC = () => {
 
       <div className="flex space-x-4 mb-8 relative z-10">
         <button
-          className={`font-press-start w-[343px] h-[79px] flex items-center justify-center rounded-xl border-2 border-black text-lg font-bold shadow-lg transform transition-transform duration-200
-            ${view === 'board' ? 'bg-[#FFE396] text-gray-700 scale-105' : 'bg-yellow-300 text-gray-700'}
+          className={`font-press-start w-[343px] h-[79px] flex items-center justify-center rounded-xl border-2 border-black text-[24px] leading-[163%] shadow-lg transform transition-transform duration-200
+            ${view === 'board' ? 'bg-[#FFE396] text-black scale-105' : 'bg-yellow-300 text-black'}
           `}
+          style={{ fontWeight: '400', letterSpacing: 0 }}
           onClick={() => setView('board')}
         >
           BOARD
         </button>
         <button
-          className={`font-press-start w-[343px] h-[79px] flex items-center justify-center rounded-xl border-2 border-black text-lg font-bold shadow-lg transform transition-transform duration-200
-            ${view === 'departments' ? 'bg-[#C0F3F9] text-gray-700 scale-105' : 'bg-green-300 text-gray-700'}
+          className={`font-press-start w-[343px] h-[79px] flex items-center justify-center rounded-xl border-2 border-black text-[24px] leading-[163%] shadow-lg transform transition-transform duration-200
+            ${view === 'departments' ? 'bg-[#C0F3F9] text-black scale-105' : 'bg-green-300 text-black'}
           `}
+          style={{ fontWeight: '400', letterSpacing: 0 }}
           onClick={() => setView('departments')}
         >
           DEPARTMENTS
