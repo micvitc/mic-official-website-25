@@ -12,8 +12,12 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        'press-start': ['"Press Start 2P"', 'cursive'],
+      },
     },
   },
   plugins: [],
 };
+
 export default config;
