@@ -4,19 +4,29 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import TeamMemberCard from './components/TeamMemberCard';
 import PresidentCard from './components/PresidentCard';
+import VicePresidentCard from './components/VicePresidentCard';
+import ManagementSecCard from './components/ManagementSecCard';
+import TechSecCard from './components/TechSecCard';
+import NonTechSecCard from './components/NonTechSecCard';
 
 const MeetTheTeamPage: React.FC = () => {
   const [view, setView] = useState<'board' | 'departments'>('board');
 
   return (
-    <div
-      className="min-h-screen flex flex-col items-center p-8 relative overflow-hidden font-sans"
-      style={{
-        backgroundImage: 'linear-gradient(180deg, #B3D9FF 0%, #B3E5FF 34%, #B1F0FC 71%, #B0F9FA 100%)',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-      }}
-    >
+    <>
+      {/* Page-specific fixed background (gradient + grid) */}
+      <div
+        className="fixed inset-0 -z-10 w-full h-full"
+        style={{
+          backgroundImage: 'linear-gradient(180deg, #B3D9FF 0%, #B3E5FF 34%, #B1F0FC 71%, #B0F9FA 100%), url(/images/grid-bg.svg)',
+          backgroundRepeat: 'repeat',
+          backgroundSize: 'auto, auto',
+        }}
+        aria-hidden="true"
+      />
+      <div
+        className="min-h-screen flex flex-col items-center p-8 relative font-sans"
+      >
       {/* Grid SVG overlay (above gradient, below content) */}
       <div
         style={{
@@ -127,14 +137,14 @@ const MeetTheTeamPage: React.FC = () => {
           {/* President, Vice-President, Management Sec */}
           <div className="flex justify-center space-x-8">
             <PresidentCard name="GALI ANNA" />
-            <TeamMemberCard role="Vice-President" name="NAME" color="bg-blue-300" />
-            <TeamMemberCard role="Management Sec" name="NAME" color="bg-green-300" />
+            <VicePresidentCard name="NAME" />
+            <ManagementSecCard name="NAME" />
           </div>
 
           {/* Tech Sec, Non-Tech Sec */}
           <div className="flex justify-center space-x-8 relative">
-            <TeamMemberCard role="Tech Sec" name="NAME" color="bg-yellow-300" />
-            <TeamMemberCard role="Non-Tech Sec" name="NAME" color="bg-pink-300" />
+            <TechSecCard name="NAME" />
+            <NonTechSecCard name="NAME" />
           </div>
         </div>
       ) : (
@@ -144,7 +154,8 @@ const MeetTheTeamPage: React.FC = () => {
           {/* Add more department-specific content here later */}
         </div>
       )}
-    </div>
+      </div>
+    </>
   );
 };
 
