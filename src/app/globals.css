@@ -1,3 +1,13 @@
+/*
+  NOTE FOR DEVELOPERS:
+  The pixel grid and gradient backgrounds are applied globally to the <body> via this file.
+  All pages will have this background by default.
+  
+  If you want a page or layout WITHOUT the grid/gradient, you can override the background in your page/component:
+    Example:
+      <div style={{ background: '#fff' }}>...</div>
+  Or, add a custom class to <body> or your wrapper to change/remove the background as needed.
+*/
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;
