@@ -27,65 +27,11 @@ body {
   }
 }
 
-.pixel-card {
+.pixel-border {
   position: relative;
-  width: 300px;
-  height: 220px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 32px 18px 18px 18px;
-  box-sizing: border-box;
-  background: #fff;
-  font-family: 'Press Start 2P', monospace;
-  z-index: 1;
-}
-
-.pixel-card--pink {
-  background: #ffdfE8;
-}
-.pixel-card--green {
-  background: #C5FFD8;
-}
-.pixel-card--blue {
-  background: #CBF1FD;
-}
-.pixel-card--yellow {
-  background: #fff4dd;
-}
-
-.pixel-card__border {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  /* Example: pink border with step effect */
-  border: 8px solid #e8a2b5;
-  box-shadow:
-    6px 6px 0 0 #e8a2b5,
-    12px 12px 0 0 #ffdfE8;
-  border-radius: 0;
+  box-shadow: 0 0 0 4px #222, 8px 8px 0 0 #fff;
   image-rendering: pixelated;
 }
 
-.pixel-card__border--green {
-  border-color: #ABEEAB;
-  box-shadow:
-    6px 6px 0 0 #ABEEAB,
-    12px 12px 0 0 #C5FFD8;
-}
-.pixel-card__border--blue {
-  border-color: #B3D9FF;
-  box-shadow:
-    6px 6px 0 0 #B3D9FF,
-    12px 12px 0 0 #CBF1FD;
-}
-.pixel-card__border--yellow {
-  border-color: #FFD782;
-  box-shadow:
-    6px 6px 0 0 #FFD782,
-    12px 12px 0 0 #fff4dd;
-}
 
 
