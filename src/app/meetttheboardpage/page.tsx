@@ -14,36 +14,9 @@ const MeetTheTeamPage: React.FC = () => {
 
   return (
     <>
-      {/* Page-specific fixed background (gradient + grid) */}
-      <div
-        className="fixed inset-0 -z-10 w-full h-full"
-        style={{
-          backgroundImage: 'linear-gradient(180deg, #B3D9FF 0%, #B3E5FF 34%, #B1F0FC 71%, #B0F9FA 100%), url(/images/grid-bg.svg)',
-          backgroundRepeat: 'repeat',
-          backgroundSize: 'auto, auto',
-        }}
-        aria-hidden="true"
-      />
       <div
         className="min-h-screen flex flex-col items-center p-8 relative font-sans"
       >
-      {/* Grid SVG overlay (above gradient, below content) */}
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 1,
-          pointerEvents: 'none',
-          backgroundImage: 'url(/images/grid-bg.svg)',
-          backgroundRepeat: 'repeat',
-          backgroundSize: 'auto',
-        }}
-        aria-hidden="true"
-      />
-
       {/* Clouds (absolute, behind content) */}
       <Image src="/images/cloud1.png" alt="Cloud 1" width={355} height={228} style={{ position: 'absolute', top: 154, left: -12, zIndex: 2 }} />
       <Image src="/images/cloud2.png" alt="Cloud 2" width={367} height={219} style={{ position: 'absolute', top: 466, left: 22, zIndex: 2 }} />

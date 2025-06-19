@@ -18,7 +18,13 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background:
+    url('/images/grid-bg.svg') repeat,
+    linear-gradient(180deg, rgba(179,217,255,0.85) 0%, rgba(179,229,255,0.85) 34%, rgba(177,240,252,0.85) 71%, rgba(176,249,250,0.85) 100%) repeat-y;
+  background-size:
+    1516px 983px,
+    100% 100%;
+  background-attachment: scroll, fixed;
   font-family: Arial, Helvetica, sans-serif;
 }
 
