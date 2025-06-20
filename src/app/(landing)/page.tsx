@@ -82,12 +82,45 @@ const LandingPage = () => {
         backgroundPosition: "top left, top left, center",
       }}
     >
-      <h1 className="text-white text-4xl md:text-5xl font-press-start z-10 text-center mb-8">
+      {/* Decorative Ghosts (top and sides) */}
+      <img
+        src="/greenghost.png"
+        alt="Left Decor"
+        className="w-7 h-8 absolute top-[700px] left-[1505px] z-30 animate-bounce"
+      />
+      <img
+        src="/redghost.png.png"
+        alt="Left Decor"
+        className="w-8 h-8 absolute top-[315px] left-[260px] z-30 animate-bounce"
+      />
+      <img
+        src="/ghost.png"
+        alt="Left Decor"
+        className="w-10 h-8 absolute top-[530px] left-[180px] z-30 animate-bounce"
+      />
+      <img
+        src="/yellowghost.png"
+        alt="Left Decor"
+        className="w-8 h-8 absolute top-[800px] left-[300px] z-30 animate-bounce"
+      />
+      <img
+        src="/blueghost.png"
+        alt="Right Decor"
+        className="w-8 h-8 absolute top-[240px] right-[310px] z-30 animate-bounce"
+      />
+      <img
+        src="/yellowghost.png"
+        alt="Right Decor"
+        className="w-8 h-8 absolute top-[510px] right-[235px] z-30 animate-bounce"
+      />
+
+      {/* Main Heading */}
+      <h1 className="text-white text-4xl md:text-5xl font-press-start z-10 text-center mb-8 mt-2">
         EVENTS
       </h1>
 
       <div className="flex flex-col gap-10 my-10">
-        {/* First row of 3 boxes */}
+        {/* First row of 3 event boxes */}
         <div className="flex flex-row gap-8 mb-2 justify-start">
           {events.slice(0, 3).map((event, i) => (
             <div
@@ -123,7 +156,7 @@ const LandingPage = () => {
           </div>
         </div>
 
-        {/* Second row of 3 boxes */}
+        {/* Second row of 3 event boxes */}
         <div className="flex flex-row gap-8 justify-start -mt-7">
           {events.slice(3, 6).map((event, i) => (
             <div
@@ -161,26 +194,26 @@ const LandingPage = () => {
             ></div>
           ))}
         </div>
+      </div>
 
-        {/* Tiny yellow dots at the bottom */}
-        <div className="w-full flex justify-center -mt-10 mb-4 -ml-12">
-          <div className="flex items-center gap-2">
-            <img
-              src="/ghost.png"
-              alt="Ghost"
-              className="w-6 h-6 object-contain"
-            />
-            {[...Array(7)].map((_, i) => (
-              <div
-                key={`tiny-dot-${i}`}
-                className="w-3 h-3 bg-yellow-300 rounded-full"
-              ></div>
-            ))}
-          </div>
+      {/* Tiny yellow dots and ghost at the bottom, now outside the card layout */}
+      <div className="w-full flex justify-center mb-4">
+        <div className="flex items-center gap-2">
+          <img
+            src="/ghost.png"
+            alt="Ghost"
+            className="w-8 h-8 object-contain"
+          />
+          {[...Array(7)].map((_, i) => (
+            <div
+              key={`tiny-dot-${i}`}
+              className="w-3 h-3 bg-yellow-300 rounded-full"
+            ></div>
+          ))}
         </div>
       </div>
 
-      {/* Ghosts at corners */}
+      {/* Ghosts at the four corners */}
       <img
         src="/yellowghost.png"
         alt="Top Left Ghost"
@@ -197,7 +230,7 @@ const LandingPage = () => {
         className="w-8 h-8 absolute bottom-24 left-20 z-50"
       />
       <img
-        src="/pinkghost.png"
+        src="/pinkghost (1).png"
         alt="Bottom Right Ghost"
         className="w-8 h-8 absolute bottom-20 right-20 z-50"
       />
