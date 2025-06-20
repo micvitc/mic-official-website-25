@@ -64,7 +64,7 @@ const LandingPage = () => {
               w-[340px] h-[308px]
               ${event.bg} ${event.text}
               border-[8px] ${event.border}
-              pixel-border
+              pixel-corners
               flex flex-col items-start justify-start
               p-6 font-press-start text-2xl
               select-none

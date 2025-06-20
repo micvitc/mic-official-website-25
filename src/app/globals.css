@@ -27,11 +27,24 @@ body {
   }
 }
 
-.pixel-border {
-  position: relative;
-  box-shadow: 0 0 0 4px #222, 8px 8px 0 0 #fff;
-  image-rendering: pixelated;
+.pixel-corners {
+  --step: 24px; 
+  clip-path: polygon(
+    0 var(--step),
+    var(--step) var(--step),
+    var(--step) 0,
+    calc(100% - var(--step)) 0,
+    calc(100% - var(--step)) var(--step),
+    100% var(--step),
+    100% calc(100% - var(--step)),
+    calc(100% - var(--step)) calc(100% - var(--step)),
+    calc(100% - var(--step)) 100%,
+    var(--step) 100%,
+    var(--step) calc(100% - var(--step)),
+    0 calc(100% - var(--step))
+  );
 }
+
 
 
 
