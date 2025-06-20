@@ -15,9 +15,6 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ role, name, color }) =>
       <div className="mt-8 text-xl font-bold font-press-start">
         {name}
       </div>
-      <div className="text-lg font-press-start">
-        {name}
-      </div>
       <div className="flex space-x-1">
         {[...Array(3)].map((_, i) => (
           <span key={i} className="text-yellow-400 text-3xl">⭐</span>

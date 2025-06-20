@@ -36,7 +36,7 @@ function useCloudFloat({ baseTop, baseLeft, amplitude = 30, speed = 1, phase = 0
   return { top, left: baseLeft };
 }
 
-const MeetTheTeamDarkPage: React.FC = () => {
+const MeetTheBoardDarkPage: React.FC = () => {
   const [view, setView] = useState<'board' | 'departments'>('board');
 
   return (
@@ -176,4 +176,4 @@ const MeetTheTeamDarkPage: React.FC = () => {
   );
 };
 
-export default MeetTheTeamDarkPage; 
+export default MeetTheBoardDarkPage; 
