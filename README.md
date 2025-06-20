@@ -34,3 +34,18 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+### To test out
+
+```bash
+npm run dev
+```
+
+- Initially without inserting the cartridge
+  ![](./images_for_readme/landing.png)
+- Once Inserted
+  ![](./images_for_readme/insertCartridge.png)
+- On clicking PowerOn it signals booting up
+  ![](./images_for_readme/powerOn.png)
+- After the power on leads to the 3D cube page
+  ![](./images_for_readme/PostPowerOn.png)
