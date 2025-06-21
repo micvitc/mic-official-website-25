@@ -67,6 +67,37 @@ const boxStyle = {
   boxSizing: "border-box" as const,
 };
 
+// Reusable Line component
+type LineProps = {
+  left: number;
+  top: number;
+  width: number;
+  height: number;
+  color?: string;
+};
+
+const Line: React.FC<LineProps> = ({
+  left,
+  top,
+  width,
+  height,
+  color = "blue",
+}) => (
+  <div
+    style={{
+      position: "absolute",
+      left,
+      top,
+      width,
+      height,
+      backgroundColor: color,
+      borderRadius: 2,
+      zIndex: 50,
+      pointerEvents: "none",
+    }}
+  />
+);
+
 const LandingPage = () => {
   return (
     <div
@@ -82,6 +113,26 @@ const LandingPage = () => {
         backgroundPosition: "top left, top left, center",
       }}
     >
+      {/*PacMan Grid Lines*/}
+      <Line left={55} top={140} width={89} height={5} color="blue" />
+      <Line left={139} top={50} width={5} height={95} color="blue" />
+      <Line left={55} top={140} width={5} height={700} color="blue" />
+      <Line left={55} top={840} width={85} height={5} color="blue" />
+      <Line left={139} top={840} width={5} height={95} color="blue" />
+      <Line left={139} top={935} width={1625} height={5} color="blue" />
+      <Line left={1760} top={840} width={5} height={95} color="blue" />
+      <Line left={1760} top={840} width={85} height={5} color="blue" />
+      <Line left={1845} top={145} width={5} height={700} color="blue" />
+      <Line left={1765} top={140} width={85} height={5} color="blue" />
+      <Line left={1765} top={50} width={5} height={95} color="blue" />
+      <Line left={140} top={50} width={1630} height={5} color="blue" />
+      <Line left={55} top={455} width={60} height={5} color="blue" />
+      <Line left={115} top={455} width={5} height={85} color="blue" />
+      <Line left={55} top={535} width={60} height={5} color="blue" />
+      <Line left={1785} top={320} width={60} height={5} color="blue" />
+      <Line left={1785} top={320} width={5} height={80} color="blue" />
+      <Line left={1785} top={430} width={5} height={40} color="blue" />
+      <Line left={1785} top={470} width={60} height={5} color="blue" />
       {/* Decorative Ghosts (top and sides) */}
       <img
         src="/greenghost.png"
@@ -115,7 +166,7 @@ const LandingPage = () => {
       />
 
       {/* Main Heading */}
-      <h1 className="text-white text-4xl md:text-5xl font-press-start z-10 text-center mb-8 mt-2">
+      <h1 className="text-white text-4xl md:text-5xl font-press-start z-10 text-center mb-8 mt-6">
         EVENTS
       </h1>
 
@@ -132,7 +183,10 @@ const LandingPage = () => {
               }}
             >
               <span className="text-2xl">{event.title}</span>
-              <p className="font-normal text-xs mt-4 font-['IBM Plex Mono',monospace]">
+              <p
+                className="info-text font-normal text-xs mt-4"
+                style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+              >
                 {event.desc}
               </p>
             </div>
@@ -142,7 +196,19 @@ const LandingPage = () => {
         {/* Pac-Man Chomping and Moving Pellets */}
         <div className="relative flex items-center w-full max-w-[964px] h-12 mx-auto -mt-7">
           {/* Pac-Man */}
-          <div className="pacman-clip"></div>
+          <img
+  src="/PacMan.gif"
+  alt="Pac-Man"
+  style={{
+    width: "48px", // adjust as needed
+    height: "48px", // adjust as needed
+    position: "absolute",
+    left: 0,
+    top: "50%",
+    transform: "translateY(-50%)",
+    zIndex: 20,
+  }}
+/>
           {/* Pellets Row */}
           <div className="pellets-row">
             <div className="pellets-inner">
@@ -168,7 +234,10 @@ const LandingPage = () => {
               }}
             >
               <span className="text-2xl">{event.title}</span>
-              <p className="font-normal text-xs mt-4 font-['IBM Plex Mono',monospace]">
+              <p
+                className="info-text font-normal text-xs mt-4"
+                style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+              >
                 {event.desc}
               </p>
             </div>
@@ -176,7 +245,7 @@ const LandingPage = () => {
         </div>
 
         {/* Vertical Dots Right */}
-        <div className="absolute top-[340px] right-[100px] flex flex-col gap-[14px] z-50">
+        <div className="absolute top-[340px] right-[80px] flex flex-col gap-[14px] z-50">
           {[...Array(5)].map((_, i) => (
             <div
               key={`v-dot-${i}`}
@@ -212,7 +281,6 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-
       {/* Ghosts at the four corners */}
       <img
         src="/yellowghost.png"

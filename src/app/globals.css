@@ -58,9 +58,6 @@ body {
   );
 }
 
-/* Animated Pac-Man (large, yellow, with chomp animation) */
-/* Add this to your global CSS (e.g., globals.css or a relevant CSS file) */
-
 .pacman-clip {
   width: 0;
   height: 0;
