@@ -133,6 +133,11 @@ const LandingPage = () => {
       <Line left={1785} top={320} width={5} height={80} color="blue" />
       <Line left={1785} top={430} width={5} height={40} color="blue" />
       <Line left={1785} top={470} width={60} height={5} color="blue" />
+      <Line left={1600} top={50} width={5} height={60} color="blue" />
+      <Line left={1460} top={105} width={140} height={5} color="blue" />
+      <Line left={1600} top={860} width={5} height={80} color="blue" />
+      <Line left={1600} top={860} width={100} height={5} color="blue" />
+      <Line left={1600} top={860} width={5} height={80} color="blue" />
       {/* Decorative Ghosts (top and sides) */}
       <img
         src="/greenghost.png"
