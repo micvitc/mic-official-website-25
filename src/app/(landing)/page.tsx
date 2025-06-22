@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 
 const events = [
   {
     title: "Event Name",
     desc: "This is the info text for the first event. Add more details here.",
+    details: "Here are even more details about the first event. Add schedule, rules, images, or anything else here.",
     bg: "bg-[#FFDFE8]",
     border: "border-[#E8A2B5]",
     text: "text-[#6d1c22]",
@@ -14,6 +15,7 @@ const events = [
   {
     title: "Event Name",
     desc: "This is the info text for the second event. Add more details here.",
+    details: "Here are even more details about the second event. Add schedule, rules, images, or anything else here.",
     bg: "bg-[#C5FFD8]",
     border: "border-[#ABEEAB]",
     text: "text-[#095709]",
@@ -22,6 +24,7 @@ const events = [
   {
     title: "Event Name",
     desc: "This is the info text for the third event. Add more details here.",
+    details: "Here are even more details about the third event. Add schedule, rules, images, or anything else here.",
     bg: "bg-[#CBF1FD]",
     border: "border-[#B3D9FF]",
     text: "text-[#0A3A6b]",
@@ -30,6 +33,7 @@ const events = [
   {
     title: "Event Name",
     desc: "This is the info text for the fourth event. Add more details here.",
+    details: "Here are even more details about the fourth event. Add schedule, rules, images, or anything else here.",
     bg: "bg-[#CBF1FD]",
     border: "border-[#B3D9FF]",
     text: "text-[#0A3A6b]",
@@ -38,6 +42,7 @@ const events = [
   {
     title: "Event Name",
     desc: "This is the info text for the fifth event. Add more details here.",
+    details: "Here are even more details about the fifth event. Add schedule, rules, images, or anything else here.",
     bg: "bg-[#fff4dd]",
     border: "border-[#FFD782]",
     text: "text-[#865B00]",
@@ -46,6 +51,7 @@ const events = [
   {
     title: "Event Name",
     desc: "This is the info text for the sixth event. Add more details here.",
+    details: "Here are even more details about the sixth event. Add schedule, rules, images, or anything else here.",
     bg: "bg-[#ffdfe8]",
     border: "border-[#E8A2B5]",
     text: "text-[#6d1c22]",
@@ -67,7 +73,6 @@ const boxStyle = {
   boxSizing: "border-box" as const,
 };
 
-// Reusable Line component
 type LineProps = {
   left: number;
   top: number;
@@ -99,6 +104,88 @@ const Line: React.FC<LineProps> = ({
 );
 
 const LandingPage = () => {
+  const [openCard, setOpenCard] = useState<number | null>(null);
+
+  React.useEffect(() => {
+    if (openCard !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [openCard]);
+
+  
+  const renderOverlay = () => {
+    if (openCard === null) return null;
+    const event = events[openCard];
+    return (
+      <div
+        className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70"
+        style={{ backdropFilter: "blur(3px)" }}
+        onClick={() => setOpenCard(null)}
+      >
+        <div
+          className={`pixel-corners ${event.bg} ${event.text} relative shadow-2xl`}
+          style={{
+            width: "90vw",
+            maxWidth: 600,
+            minHeight: 400,
+            border: `16px solid ${event.borderColor}`,
+            padding: "2.5rem 2rem",
+            boxSizing: "border-box",
+            position: "relative",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            justifyContent: "flex-start",
+            fontWeight: "bold",
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 text-3xl text-gray-700 hover:text-red-500 transition-colors font-bold z-10"
+            aria-label="Close"
+            onClick={() => setOpenCard(null)}
+            style={{
+              background: "rgba(255,255,255,0.7)",
+              border: "none",
+              borderRadius: "50%",
+              width: "2.5rem",
+              height: "2.5rem",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
+            }}
+          >
+            ×
+          </button>
+          <span className="font-press-start text-3xl mb-4">{event.title}</span>
+          <p
+            className="font-IBM Plex Mono text-base mb-4"
+            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+          >
+            {event.desc}
+          </p>
+          <div className="font-normal text-sm" style={{ fontFamily: "'IBM Plex Mono', monospace" }}>
+            {event.details}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+ 
+  const getCardClass = (event: typeof events[0]) =>
+    `pixel-corners font-press-start ${event.bg} ${event.text} cursor-pointer transition-all duration-200${
+      openCard === null ? " hover:scale-105 hover:shadow-xl" : ""
+    }`;
+
   return (
     <div
       className="relative w-full min-h-screen bg-cover bg-center overflow-hidden flex flex-col items-center px-4 py-10"
@@ -119,55 +206,56 @@ const LandingPage = () => {
       <Line left={55} top={140} width={5} height={700} color="blue" />
       <Line left={55} top={840} width={85} height={5} color="blue" />
       <Line left={139} top={840} width={5} height={95} color="blue" />
-      <Line left={139} top={935} width={1625} height={5} color="blue" />
-      <Line left={1760} top={840} width={5} height={95} color="blue" />
-      <Line left={1760} top={840} width={85} height={5} color="blue" />
-      <Line left={1845} top={145} width={5} height={700} color="blue" />
-      <Line left={1765} top={140} width={85} height={5} color="blue" />
-      <Line left={1765} top={50} width={5} height={95} color="blue" />
-      <Line left={140} top={50} width={1630} height={5} color="blue" />
+      <Line left={139} top={935} width={1230} height={5} color="blue" />
+      <Line left={1364} top={840} width={5} height={95} color="blue" />
+      <Line left={1365} top={840} width={95} height={5} color="blue" />
+      <Line left={1460} top={140} width={5} height={705} color="blue" />
+      <Line left={1380} top={140} width={85} height={5} color="blue" />
+      <Line left={1380} top={50} width={5} height={95} color="blue" />
+      <Line left={140} top={50} width={1240} height={5} color="blue" />
       <Line left={55} top={455} width={60} height={5} color="blue" />
       <Line left={115} top={455} width={5} height={85} color="blue" />
       <Line left={55} top={535} width={60} height={5} color="blue" />
-      <Line left={1785} top={320} width={60} height={5} color="blue" />
-      <Line left={1785} top={320} width={5} height={80} color="blue" />
-      <Line left={1785} top={430} width={5} height={40} color="blue" />
-      <Line left={1785} top={470} width={60} height={5} color="blue" />
-      <Line left={1600} top={50} width={5} height={60} color="blue" />
-      <Line left={1460} top={105} width={140} height={5} color="blue" />
-      <Line left={1600} top={860} width={5} height={80} color="blue" />
-      <Line left={1600} top={860} width={100} height={5} color="blue" />
-      <Line left={1600} top={860} width={5} height={80} color="blue" />
+      <Line left={1405} top={320} width={55} height={5} color="blue" />
+      <Line left={1405} top={320} width={5} height={80} color="blue" />
+      <Line left={1405} top={430} width={5} height={40} color="blue" />
+      <Line left={1405} top={470} width={60} height={5} color="blue" />
+      <Line left={1200} top={50} width={5} height={60} color="blue" />
+      <Line left={1060} top={105} width={140} height={5} color="blue" />
+      <Line left={60} top={760} width={65} height={5} color="blue" />
+      <Line left={120} top={690} width={5} height={70} color="blue" />
+      <Line left={120} top={690} width={65} height={5} color="blue" />
+
       {/* Decorative Ghosts (top and sides) */}
       <img
         src="/greenghost.png"
         alt="Left Decor"
-        className="w-7 h-8 absolute top-[700px] left-[1505px] z-30 animate-bounce"
+        className="w-7 h-8 absolute top-[700px] right-[205px] z-30 animate-bounce"
       />
       <img
         src="/redghost.png.png"
         alt="Left Decor"
-        className="w-8 h-8 absolute top-[315px] left-[260px] z-30 animate-bounce"
+        className="w-8 h-8 absolute top-[215px] left-[200px] z-30 animate-bounce"
       />
       <img
         src="/ghost.png"
         alt="Left Decor"
-        className="w-10 h-8 absolute top-[530px] left-[180px] z-30 animate-bounce"
+        className="w-10 h-8 absolute top-[430px] left-[160px] z-30 animate-bounce"
       />
       <img
         src="/yellowghost.png"
         alt="Left Decor"
-        className="w-8 h-8 absolute top-[800px] left-[300px] z-30 animate-bounce"
+        className="w-8 h-8 absolute top-[680px] left-[210px] z-30 animate-bounce"
       />
       <img
         src="/blueghost.png"
         alt="Right Decor"
-        className="w-8 h-8 absolute top-[240px] right-[310px] z-30 animate-bounce"
+        className="w-8 h-8 absolute top-[240px] right-[190px] z-30 animate-bounce"
       />
       <img
         src="/yellowghost.png"
         alt="Right Decor"
-        className="w-8 h-8 absolute top-[510px] right-[235px] z-30 animate-bounce"
+        className="w-8 h-8 absolute top-[510px] right-[135px] z-30 animate-bounce"
       />
 
       {/* Main Heading */}
@@ -181,11 +269,12 @@ const LandingPage = () => {
           {events.slice(0, 3).map((event, i) => (
             <div
               key={i}
-              className={`pixel-corners font-press-start ${event.bg} ${event.text}`}
+              className={getCardClass(event)}
               style={{
                 ...boxStyle,
                 border: `14px solid ${event.borderColor}`,
               }}
+              onClick={() => setOpenCard(i)}
             >
               <span className="text-2xl">{event.title}</span>
               <p
@@ -197,31 +286,36 @@ const LandingPage = () => {
             </div>
           ))}
         </div>
-
         {/* Pac-Man Chomping and Moving Pellets */}
         <div className="relative flex items-center w-full max-w-[964px] h-12 mx-auto -mt-7">
           {/* Pac-Man */}
           <img
-  src="/PacMan.gif"
-  alt="Pac-Man"
-  style={{
-    width: "48px", // adjust as needed
-    height: "48px", // adjust as needed
-    position: "absolute",
-    left: 0,
-    top: "50%",
-    transform: "translateY(-50%)",
-    zIndex: 20,
-  }}
-/>
+            src="/PacMan.gif"
+            alt="Pac-Man"
+            style={{
+              width: "48px",
+              height: "48px",
+              position: "absolute",
+              left: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 20,
+            }}
+          />
           {/* Pellets Row */}
           <div className="pellets-row">
             <div className="pellets-inner">
               {[...Array(48)].map((_, i) => (
-                <div key={i} className="w-4 h-4 bg-yellow-300 rounded-full shadow"></div>
+                <div
+                  key={i}
+                  className="w-4 h-4 bg-yellow-300 rounded-full shadow"
+                ></div>
               ))}
               {[...Array(48)].map((_, i) => (
-                <div key={i + 48} className="w-4 h-4 bg-yellow-300 rounded-full shadow"></div>
+                <div
+                  key={i + 48}
+                  className="w-4 h-4 bg-yellow-300 rounded-full shadow"
+                ></div>
               ))}
             </div>
           </div>
@@ -231,12 +325,13 @@ const LandingPage = () => {
         <div className="flex flex-row gap-8 justify-start -mt-7">
           {events.slice(3, 6).map((event, i) => (
             <div
-              key={i}
-              className={`pixel-corners font-press-start ${event.bg} ${event.text}`}
+              key={i + 3}
+              className={getCardClass(event)}
               style={{
                 ...boxStyle,
                 border: `12px solid ${event.borderColor}`,
               }}
+              onClick={() => setOpenCard(i + 3)}
             >
               <span className="text-2xl">{event.title}</span>
               <p
@@ -269,8 +364,7 @@ const LandingPage = () => {
           ))}
         </div>
       </div>
-
-      {/* Tiny yellow dots and ghost at the bottom, now outside the card layout */}
+      {/* Tiny yellow dots and ghost at the bottom */}
       <div className="w-full flex justify-center mb-4">
         <div className="flex items-center gap-2">
           <img
@@ -313,6 +407,9 @@ const LandingPage = () => {
       <div className="absolute bottom-6 left-6 right-6 h-2 bg-blue-900 z-40"></div>
       <div className="absolute top-6 bottom-6 left-6 w-2 bg-blue-900 z-40"></div>
       <div className="absolute top-6 bottom-6 right-6 w-2 bg-blue-900 z-40"></div>
+
+      {/* Modal Overlay */}
+      {renderOverlay()}
     </div>
   );
 };
