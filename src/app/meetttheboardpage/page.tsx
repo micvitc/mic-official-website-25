@@ -2,12 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import TeamMemberCard from './components/TeamMemberCard';
-import PresidentCard from './components/PresidentCard';
-import VicePresidentCard from './components/VicePresidentCard';
-import ManagementSecCard from './components/ManagementSecCard';
-import TechSecCard from './components/TechSecCard';
-import NonTechSecCard from './components/NonTechSecCard';
+import RedCard from './components/RedCard';
+import  BlueCard  from './components/BlueCard';
+import GreenCard from './components/GreenCard';
+import YellowCard from './components/YellowCard';
+import YearButton from './components/YearButton';
 
 // Floating cloud animation hook
 interface CloudFloatOptions {
@@ -17,6 +16,59 @@ interface CloudFloatOptions {
   speed?: number;
   phase?: number;
 }
+
+
+const dummyData = [
+  {
+    name: 'John Doe',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Jane Smith',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Alex Lee',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Mary Jane',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Chris Johnson',
+    title: 'department PRESIDENT',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Sarah Parker',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Michael Scott',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+  {
+    name: 'Dwight Schrute',
+    title: 'department',
+    imageSrc: '/path/to/image.png',
+  },
+];
+
+const cardOrder = [
+  RedCard,
+  BlueCard,
+  GreenCard,
+  YellowCard,
+];
+
+
 function useCloudFloat({ baseTop, baseLeft, amplitude = 30, speed = 1, phase = 0 }: CloudFloatOptions) {
   const [top, setTop] = useState(baseTop);
   const frame = useRef(0);
@@ -38,6 +90,13 @@ function useCloudFloat({ baseTop, baseLeft, amplitude = 30, speed = 1, phase = 0
 
 const MeetTheBoardPage: React.FC = () => {
   const [view, setView] = useState<'board' | 'departments'>('board');
+  const rows = [];
+  const cardsPerRow = 4;
+
+  for (let i = 0; i < dummyData.length; i += cardsPerRow) {
+    const chunk = dummyData.slice(i, i + cardsPerRow);
+    rows.push(chunk);
+  }
 
   return (
     <>
@@ -78,7 +137,9 @@ const MeetTheBoardPage: React.FC = () => {
         </svg>
       </div>
 
-      <div className="mb-8 relative z-10">
+      <div className="mb-8  z-10 flex  ">
+       {(view === 'departments')?
+        (<div className='absolute left-0 ml-16'><YearButton/></div>):(<div></div>)} 
         <svg width="824" height="56" viewBox="0 0 824 56" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-auto h-16">
           <path d="M0 56V0H16V8H24V16H32V8H40V0H56V56H40V24H32V40H24V24H16V56H0ZM72 56V48H64V24H72V16H112V24H120V40H80V48H112V56H72ZM80 32H104V24H80V32ZM136 56V48H128V24H136V16H176V24H184V40H144V48H176V56H136ZM144 32H168V24H144V32ZM216 56V24H200V16H216V0H232V16H248V24H232V56H216ZM344 56V24H328V16H344V0H360V16H376V24H360V56H344ZM384 56V0H400V16H432V24H440V56H424V24H400V56H384ZM456 56V48H448V24H456V16H496V24H504V40H464V48H496V56H456ZM464 32H488V24H464V32ZM600 56V8H584V0H632V8H616V56H600ZM648 56V48H640V24H648V16H688V24H696V40H656V48H688V56H648ZM656 32H680V24H656V32ZM712 56V48H704V40H712V32H744V24H712V16H752V24H760V56H712ZM720 48H744V40H720V48ZM768 56V16H816V24H824V56H808V24H800V56H784V24H776V56H768Z" fill="black"/>
         </svg>
@@ -144,26 +205,27 @@ const MeetTheBoardPage: React.FC = () => {
       </div>
 
       {view === 'board' ? (
-        <div className="flex flex-col items-center space-y-8 relative z-10">
-          {/* President, Vice-President, Management Sec */}
-          <div className="flex justify-center space-x-8">
-            <PresidentCard name="GALI ANNA" />
-            <VicePresidentCard name="NAME" />
-            <ManagementSecCard name="NAME" />
-          </div>
-
-          {/* Tech Sec, Non-Tech Sec */}
-          <div className="flex justify-center space-x-8 relative">
-            <TechSecCard name="NAME" />
-            <NonTechSecCard name="NAME" />
-          </div>
-        </div>
+        <p className="text-lg text-gray-600">This is a placeholder for the  content.</p>
       ) : (
-        <div className="flex flex-col items-center space-y-8 relative z-10">
-          <h2 className="text-3xl font-bold text-gray-700">Departments View</h2>
-          <p className="text-lg text-gray-600">This is a placeholder for the Departments content.</p>
-          {/* Add more department-specific content here later */}
+
+<div className="flex flex-col items-center space-y-8 relative z-10">
+      {rows.map((rowData, rowIndex) => (
+        <div key={rowIndex} className="flex justify-center space-x-8">
+          {rowData.map((data, index) => {
+            // Pick the card component based on order
+            const CardComponent = cardOrder[index % cardOrder.length];
+            return (
+              <CardComponent
+                key={index}
+                name={data.name}
+                title={data.title}
+                imageSrc={data.imageSrc}
+              />
+            );
+          })}
         </div>
+      ))}
+    </div>
       )}
       </div>
     </>
