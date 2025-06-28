@@ -28,6 +28,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
 @keyframes cloud-float {
   0% { transform: translateY(0); }
   20% { transform: translateY(15px); }
@@ -37,6 +38,9 @@ body {
   100% { transform: translateY(0); }
 }
 
+
+/* Tailwind utilities layer for custom utilities */
+
 @layer utilities {
   .cloud-float {
     animation: cloud-float 2.5s linear infinite;
@@ -44,6 +48,101 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  /* Utility variant of pacman-clip (smaller, conic-gradient style) */
+  .pacman-clip {
+    width: 1.75rem;
+    height: 1.75rem;
+    background: conic-gradient(
+      #facc15 36deg, 
+      transparent 0 120deg, 
+      #facc15 0 360deg
+    );
+    border-radius: 50%;
+  }
+}
+
+/* Pixelated corners for event boxes */
+.pixel-corners {
+  --step: 24px; 
+  clip-path: polygon(
+    0 var(--step),
+    var(--step) var(--step),
+    var(--step) 0,
+    calc(100% - var(--step)) 0,
+    calc(100% - var(--step)) var(--step),
+    100% var(--step),
+    100% calc(100% - var(--step)),
+    calc(100% - var(--step)) calc(100% - var(--step)),
+    calc(100% - var(--step)) 100%,
+    var(--step) 100%,
+    var(--step) calc(100% - var(--step)),
+    0 calc(100% - var(--step))
+  );
+}
+.pixel-corners {
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.pixel-corners:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.18);
+  border-color: #222; /* Or any highlight color you prefer */
+  background: #f9fafb; /* Optional: subtle highlight */
+  z-index: 20;
+}
+
+
+.pacman-clip {
+  width: 0;
+  height: 0;
+  border-top: 20px solid #facc15;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid #facc15;
+  border-left: 20px solid #facc15;
+  border-radius: 20px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  animation: pacman-chomp-border 0.45s infinite linear;
+}
+
+@keyframes pacman-chomp-border {
+  0%, 100% {
+    border-right-width: 20px;
+  }
+  50% {
+    border-right-width: 0px;
+  }
+}
+
+
+
+/* Animation for moving pellets */
+@keyframes pellets-move {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.pellets-row {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  margin-left: 3.2rem; 
+  display: flex;
+  align-items: center;
+}
+
+.pellets-inner {
+  display: flex;
+  gap: 1.3rem;
+  animation: pellets-move 13s linear infinite;
 }
 
 .font-press-start {
