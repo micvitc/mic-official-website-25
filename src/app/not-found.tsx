@@ -74,50 +74,84 @@ const NotFoundPage: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden bg-gradient-to-b from-[#0B1E3B] to-[#1B3358] flex items-center justify-center" style={{ fontFamily: 'Press Start 2P, monospace' }}>
-      {/* Grid background */}
-      <div className="absolute inset-0 z-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-      {/* White dots */}
-      {whiteDotsSvg}
-      {/* Clouds */}
-      <Image src="/images/cloud1.png" alt="Cloud 1" width={120} height={60} style={{ position: 'absolute', ...c1, zIndex: 2 }} />
-      <Image src="/images/cloud2.png" alt="Cloud 2" width={140} height={70} style={{ position: 'absolute', ...c2, zIndex: 2 }} />
-      <Image src="/images/cloud1.png" alt="Cloud 3" width={100} height={50} style={{ position: 'absolute', ...c3, zIndex: 2 }} />
-      <Image src="/images/cloud3.png" alt="Cloud 4" width={90} height={45} style={{ position: 'absolute', ...c4, zIndex: 2 }} />
-      <Image src="/images/cloud3.png" alt="Cloud 5" width={110} height={55} style={{ position: 'absolute', ...c5, zIndex: 2 }} />
-      <Image src="/images/cloud2.png" alt="Cloud 6" width={130} height={65} style={{ position: 'absolute', ...c6, zIndex: 2 }} />
-      <Image src="/images/cloud1.png" alt="Cloud 7" width={100} height={50} style={{ position: 'absolute', ...c7, zIndex: 2 }} />
-      {/* Logo */}
-      <div style={{ position: 'absolute', top: 24, left: 24, zIndex: 10 }}>
-        <Image src={logoUrl} alt="MIC Logo" width={64} height={64} />
-      </div>
-      {/* Main PNG text */}
-      <div style={{ position: 'absolute', left: 265, top: 327, zIndex: 10 }}>
-        <Image src={textPngUrl} alt="YOU DIED! 404" width={650} height={200} />
-      </div>
-      {/* Button */}
-      <button
-        style={{ position: 'absolute', left: 420, top: 500, zIndex: 10, width: 340, height: 70, display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'none', border: 'none', cursor: 'pointer' }}
-        onClick={() => { /* Placeholder: navigate to another page */ }}
-      >
-        <span style={{ position: 'absolute', width: '100%', height: '100%' }}>{buttonSvg}</span>
-        <span style={{ position: 'relative', zIndex: 2, color: '#111', fontFamily: 'Press Start 2P, monospace', fontSize: 22, letterSpacing: 2 }}>RESPAWN TO HOME</span>
-      </button>
-      {/* Green menu button */}
-      <button
-        style={{ position: 'absolute', right: 32, bottom: 32, zIndex: 20, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
-        onClick={() => setMenuOpen((v) => !v)}
-        aria-label="Open menu"
-      >
-        {menuButtonSvg}
-      </button>
-      {/* Placeholder menu */}
-      {menuOpen && (
-        <div style={{ position: 'absolute', right: 90, bottom: 90, zIndex: 30, background: '#222', color: '#fff', padding: 24, borderRadius: 12, minWidth: 200, fontSize: 16 }}>
-          <div>Menu placeholder</div>
+    <>
+      {/* Grid background at the very bottom */}
+      <div className="fixed inset-0 z-0 pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          backgroundColor: 'transparent'
+        }}
+      />
+      {/* Gradient overlay */}
+      <div className="pointer-events-none fixed inset-0 z-10" style={{
+        background: "linear-gradient(180deg, rgba(0,8,16,0.95) 0%, rgba(23,72,98,0.95) 34%, rgba(17,51,115,0.95) 71%, rgba(25,44,85,0.95) 100%)",
+        mixBlendMode: "multiply"
+      }} />
+      <div className="relative min-h-screen w-full overflow-hidden flex items-center justify-center z-20" style={{ fontFamily: 'Press Start 2P, monospace' }}>
+        {/* White dots */}
+        {whiteDotsSvg}
+        {/* Clouds */}
+        <Image src="/images/cloud1.png" alt="Cloud 1" width={355} height={228} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 154, baseLeft: -12, amplitude: 25, speed: 0.8, phase: 0 }), zIndex: 2 }} />
+        <Image src="/images/cloud2.png" alt="Cloud 2" width={367} height={219} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 466, baseLeft: 22, amplitude: 35, speed: 1.1, phase: 1 }), zIndex: 2 }} />
+        <Image src="/images/cloud1.png" alt="Cloud 3" width={355} height={228} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 772.98, baseLeft: 232, amplitude: 30, speed: 0.9, phase: 2 }), zIndex: 2 }} />
+        <Image src="/images/cloud3.png" alt="Cloud 4" width={204} height={125} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 790, baseLeft: 1003, amplitude: 28, speed: 1.2, phase: 3 }), zIndex: 2 }} />
+        <Image src="/images/cloud3.png" alt="Cloud 5" width={204} height={125} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 604.98, baseLeft: 1331, amplitude: 32, speed: 1.0, phase: 4 }), zIndex: 2 }} />
+        <Image src="/images/cloud2.png" alt="Cloud 6" width={388} height={254} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 127.98, baseLeft: 1142, amplitude: 27, speed: 1.3, phase: 5 }), zIndex: 2 }} />
+        <Image src="/images/cloud1.png" alt="Cloud 7" width={355} height={228} style={{ position: 'absolute', ...useCloudFloat({ baseTop: -23, baseLeft: 847, amplitude: 22, speed: 1.05, phase: 6 }), zIndex: 2 }} />
+        {/* Logo */}
+        <div style={{ position: 'absolute', top: 24, left: 24, zIndex: 10 }}>
+          <Image src={logoUrl} alt="MIC Logo" width={64} height={64} />
         </div>
-      )}
-    </div>
+        {/* Cloud above YOU DIED! 404 (animated) */}
+        <Image src="/images/cloud3.png" alt="Cloud Above 404" width={204} height={125} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 80, baseLeft: 500, amplitude: 18, speed: 1.1, phase: 7 }), zIndex: 11 }} />
+        {/* Main PNG text */}
+        <div style={{ position: 'absolute', left: '50%', top: 220, transform: 'translateX(-50%)', zIndex: 10 }}>
+          <Image src={textPngUrl} alt="YOU DIED! 404" width={900} height={232} />
+        </div>
+        {/* Button */}
+        <button
+          type="button"
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: 220 + 232 + 16, // image top + image height + reduced margin
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            width: 340,
+            height: 70,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer'
+          }}
+          onClick={() => {
+            // TODO: Add navigation or logic for respawn button here
+          }}
+        >
+          <Image src="/images/respawn-button.png" alt="RESPAWN TO HOME" width={340} height={70} />
+        </button>
+        {/* Cloud under and bottom right to RESPWAN button (animated) */}
+        <Image src="/images/cloud3.png" alt="Cloud Bottom Right Respawn" width={204} height={125} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 520, baseLeft: 950, amplitude: 20, speed: 1.15, phase: 8 }), zIndex: 2 }} />
+        {/* Green menu button */}
+        <button
+          style={{ position: 'absolute', right: 32, bottom: 32, zIndex: 20, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label="Open menu"
+        >
+          {menuButtonSvg}
+        </button>
+        {/* Placeholder menu */}
+        {menuOpen && (
+          <div style={{ position: 'absolute', right: 90, bottom: 90, zIndex: 30, background: '#222', color: '#fff', padding: 24, borderRadius: 12, minWidth: 200, fontSize: 16 }}>
+            <div>Menu placeholder</div>
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 
