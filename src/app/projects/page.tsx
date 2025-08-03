@@ -80,7 +80,7 @@ const Cloud = memo(({ config }: { config: CloudFloatOptions }) => {
 });
 
 // Main component
-const GalleryPage: React.FC = () => {
+const ProjectsPage: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -176,7 +176,7 @@ const GalleryPage: React.FC = () => {
             role="heading"
             aria-level={1}
           >
-            Gallery
+            Projects
           </h1>
           <p
             className={`font-press-start ${themeColors.textColor} text-lg sm:text-xl md:text-2xl z-20 transition-colors duration-300`}
@@ -190,4 +190,4 @@ const GalleryPage: React.FC = () => {
   );
 };
 
-export default memo(GalleryPage);
+export default memo(ProjectsPage);
