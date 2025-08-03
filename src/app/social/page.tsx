@@ -1,51 +1,51 @@
-"use client"; //client side only 
+"use client"; 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
 const clouds = [
-  { src: "/images/cloud1.png", alt: "Cloud", width: 310, height: 150, style: { top: 270, left: 0, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 250, height: 120, style: { top: 180, left: 700, zIndex: 0 } },
-  { src: "/images/cloud3.png", alt: "Cloud", width: 320, height: 160, style: { top: 350, left: 400, zIndex: 0 } },
-  { src: "/images/cloud1.png", alt: "Cloud", width: 220, height: 110, style: { top: 500, left: 950, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 200, height: 100, style: { top: 600, left: 200, zIndex: 0 } },
-  { src: "/images/cloud1.png", alt: "Cloud", width: 260, height: 130, style: { top: 80, left: 500, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 260, height: 130, style: { top: 480, left: 50, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 210, height: 105, style: { top: 250, left: 1000, zIndex: 0 } },
-  { src: "/images/cloud3.png", alt: "Cloud", width: 280, height: 140, style: { top: 420, left: 700, zIndex: 0 } },
-  { src: "/images/cloud1.png", alt: "Cloud", width: 240, height: 120, style: { top: 50, left: 120, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 230, height: 115, style: { top: 520, left: 510, zIndex: 0 } },
-  { src: "/images/cloud3.png", alt: "Cloud", width: 250, height: 125, style: { top: 80, left: 900, zIndex: 0 } },
-  { src: "/images/cloud1.png", alt: "Cloud", width: 300, height: 150, style: { top: 100, left: 1100, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 250, height: 120, style: { top: 250, left: 1300, zIndex: 0 } },
-  { src: "/images/cloud3.png", alt: "Cloud", width: 320, height: 160, style: { top: 400, left: 1100, zIndex: 0 } },
-  { src: "/images/cloud1.png", alt: "Cloud", width: 220, height: 110, style: { top: 550, left: 1400, zIndex: 0 } },
-  { src: "/images/cloud2.png", alt: "Cloud", width: 200, height: 100, style: { top: 650, left: 1200, zIndex: 0 } },
+  { src: "/images/cloud1.png", alt: "Cloud", width: 310, height: 150, style: { top: "27vh", left: "0vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 250, height: 120, style: { top: "18vh", left: "46vw", zIndex: 0 } },
+  { src: "/images/cloud3.png", alt: "Cloud", width: 320, height: 160, style: { top: "35vh", left: "26vw", zIndex: 0 } },
+  { src: "/images/cloud1.png", alt: "Cloud", width: 220, height: 110, style: { top: "50vh", left: "62vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 200, height: 100, style: { top: "60vh", left: "13vw", zIndex: 0 } },
+  { src: "/images/cloud1.png", alt: "Cloud", width: 260, height: 130, style: { top: "8vh", left: "33vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 260, height: 130, style: { top: "48vh", left: "3vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 210, height: 105, style: { top: "25vh", left: "66vw", zIndex: 0 } },
+  { src: "/images/cloud3.png", alt: "Cloud", width: 280, height: 140, style: { top: "42vh", left: "46vw", zIndex: 0 } },
+  { src: "/images/cloud1.png", alt: "Cloud", width: 240, height: 120, style: { top: "5vh", left: "8vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 230, height: 115, style: { top: "52vh", left: "34vw", zIndex: 0 } },
+  { src: "/images/cloud3.png", alt: "Cloud", width: 250, height: 125, style: { top: "8vh", left: "60vw", zIndex: 0 } },
+  { src: "/images/cloud1.png", alt: "Cloud", width: 300, height: 150, style: { top: "10vh", left: "73vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 250, height: 120, style: { top: "25vh", left: "86vw", zIndex: 0 } },
+  { src: "/images/cloud3.png", alt: "Cloud", width: 320, height: 160, style: { top: "40vh", left: "73vw", zIndex: 0 } },
+  { src: "/images/cloud1.png", alt: "Cloud", width: 220, height: 110, style: { top: "55vh", left: "93vw", zIndex: 0 } },
+  { src: "/images/cloud2.png", alt: "Cloud", width: 200, height: 100, style: { top: "65vh", left: "80vw", zIndex: 0 } },
 ];
 
 const pipes = [
   {
-    pipeLeft: 200,
-    pipeTop: 320,
-    pipeHeight: 80,
-    upright: true,
+    pipeLeft: "8vw",
+    topPipeHeight: "45vh",
+    bottomPipeHeight: "35vh",
+    gap: "20vh",
   },
   {
-    pipeLeft: 500,
-    pipeTop: 180,
-    pipeHeight: 80,
-    upright: false,
+    pipeLeft: "35vw",
+    topPipeHeight: "25vh",
+    bottomPipeHeight: "55vh",
+    gap: "20vh",
   },
   {
-    pipeLeft: 760,
-    pipeTop: 380,
-    pipeHeight: 80,
-    upright: true,
+    pipeLeft: "62vw",
+    topPipeHeight: "55vh",
+    bottomPipeHeight: "25vh",
+    gap: "20vh",
   },
   {
-    pipeLeft: 1080,
-    pipeTop: 300,
-    pipeHeight: 80,
-    upright: false,
+    pipeLeft: "85vw",
+    topPipeHeight: "35vh",
+    bottomPipeHeight: "45vh",
+    gap: "20vh",
   },
 ];
 
@@ -56,13 +56,13 @@ const PIPE_HEAD_HEIGHT = 60;
 
 const icons = [
   {
-    href: "https://mail.google.com/mail/u/0/#inbox?compose=CllgCKHRLsSBsQdMlSszGrlrxQxSjHMzgMBpLTXMjRKBQHhRTQQtMhZxDcbgbTbXNpPNhzVcTcL",
+    href: "mailto:micvitcc@gmail.com",
     src: "/images/mail.png",
     alt: "Email",
-    width: 95,
+    width: 80,
     height: 60,
-    left: 213,
-    top: 230,
+    left: "9vw",
+    top: "50vh",
     aria: "Send Email",
   },
   {
@@ -71,8 +71,8 @@ const icons = [
     alt: "Instagram",
     width: 80,
     height: 60,
-    left: 1100,
-    top: 385,
+    left: "36vw",
+    top: "30vh",
     aria: "Instagram",
   },
   {
@@ -81,8 +81,8 @@ const icons = [
     alt: "LinkedIn",
     width: 80,
     height: 60,
-    left: 780,
-    top: 275,
+    left: "63vw",
+    top: "60vh",
     aria: "LinkedIn",
   },
 ];
@@ -90,16 +90,16 @@ const icons = [
 const bird = {
   src: "/images/bird.png",
   alt: "Flappy Bird",
-  width: 100,
-  height: 45,
-  left: 510,
-  top: 265,
+  width: 60,
+  height: 35,
+  left: "20vw",
+  top: "45vh",
 };
 
 const STAR_COUNT = 60;
 const STAR_POSITIONS = Array.from({ length: STAR_COUNT }).map((_, i) => ({
-  top: Math.floor((i * 123) % 700) + Math.floor(i * 17) % 40,
-  left: Math.floor((i * 337) % 1500) + Math.floor(i * 31) % 40,
+  top: Math.floor((i * 123) % 70) + Math.floor(i * 17) % 4, // percentage values
+  left: Math.floor((i * 337) % 100) + Math.floor(i * 31) % 4, // percentage values
   size: Math.random() * 2 + 1,
 }));
 
@@ -107,12 +107,17 @@ export default function SocialPage() {
   const [darkMode, setDarkMode] = useState(true);
   const [fade, setFade] = useState(false);
   const [pageHeight, setPageHeight] = useState<number | null>(null);
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
-    setPageHeight(window.innerHeight);
-    const handleResize = () => setPageHeight(window.innerHeight);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const updateDimensions = () => {
+      setPageHeight(window.innerHeight);
+      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
   const background = darkMode
@@ -127,21 +132,19 @@ export default function SocialPage() {
     }, 400);
   };
 
-  function getBranchCount(isUpright: boolean, pipeTop: number, pipeHeight: number) {
+  function getBranchCount(height: string) {
     if (pageHeight === null) return 0;
-    return Math.ceil(
-      (isUpright
-        ? pageHeight - (pipeTop + pipeHeight)
-        : pipeTop) / PIPE_BRANCH_HEIGHT
-    );
+    const heightPx = (parseFloat(height) / 100) * pageHeight;
+    return Math.ceil(heightPx / PIPE_BRANCH_HEIGHT);
   }
 
-  function getBranchLength(isUpright: boolean, pipeTop: number, pipeHeight: number) {
-    if (pageHeight === null) return 0;
-    return isUpright
-      ? pageHeight - (pipeTop + pipeHeight)
-      : pipeTop;
-  }
+  // Calculate responsive sizes based on screen width
+  const getResponsiveSize = (baseSize: number) => {
+    if (screenSize.width < 1024) return baseSize * 0.7; // Smaller laptops
+    if (screenSize.width < 1366) return baseSize * 0.8; // Medium laptops
+    if (screenSize.width < 1920) return baseSize * 0.9; // Large laptops
+    return baseSize; // Very large screens
+  };
 
   if (pageHeight === null) return null;
 
@@ -157,16 +160,17 @@ export default function SocialPage() {
         filter: fade ? "brightness(0.7)" : "none",
         transitionProperty: "background, filter",
         transitionDuration: "0.4s",
+        minHeight: "600px", 
       }}
     >
-      {/* star dots */}
+      {/* star dots with percentage positioning */}
       {STAR_POSITIONS.map((star, i) => (
         <div
           key={i}
           style={{
             position: "absolute",
-            top: star.top,
-            left: star.left,
+            top: `${star.top}vh`,
+            left: `${star.left}vw`,
             width: star.size,
             height: star.size,
             borderRadius: "50%",
@@ -178,7 +182,7 @@ export default function SocialPage() {
         />
       ))}
 
-      {/* grid background */}
+      {/*  grid background */}
       <div
         style={{
           position: "absolute",
@@ -186,41 +190,44 @@ export default function SocialPage() {
           height: "100%",
           backgroundImage:
             "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-          backgroundSize: "40px 40px",
+          backgroundSize: `${Math.max(30, screenSize.width * 0.03)}px ${Math.max(30, screenSize.width * 0.03)}px`,
           zIndex: 0,
           pointerEvents: "none",
         }}
       />
 
-      {/* clouds */}
+      {/*  clouds */}
       {clouds.map((cloud, i) => (
         <Image
           key={i}
           src={cloud.src}
           alt={cloud.alt}
-          width={cloud.width}
-          height={cloud.height}
+          width={getResponsiveSize(cloud.width)}
+          height={getResponsiveSize(cloud.height)}
           style={{
             position: "absolute",
-            ...cloud.style,
-            pointerEvents: "none",
+            top: cloud.style.top,
+            left: cloud.style.left,
             zIndex: cloud.style.zIndex ?? 1,
+            pointerEvents: "none",
             filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.10))",
             opacity: fade ? 0.7 : 1,
             transition: "opacity 0.4s",
+            maxWidth: "20vw", // Prevent clouds from being too large
+            height: "auto",
           }}
           priority
         />
       ))}
 
-      {/* logo as a button to home */}
+      {/*  logo */}
       <a
         href="/main"
         aria-label="Go to home"
         style={{
           position: "absolute",
-          top: 20,
-          left: 20,
+          top: "2vh",
+          left: "2vw",
           zIndex: 2,
           display: "inline-block",
         }}
@@ -228,95 +235,167 @@ export default function SocialPage() {
         <Image
           src="/images/mic-logo.png"
           alt="MIC Logo"
-          width={50}
-          height={50}
+          width={Math.max(40, Math.min(60, screenSize.width * 0.04))}
+          height={Math.max(40, Math.min(60, screenSize.width * 0.04))}
           priority
         />
       </a>
 
-      {/* pipes */}
+      {/* Flappy Bird style pipes */}
       {pipes.map((pipe, i) => {
-        const isUpright = pipe.upright;
-        const branchCount = getBranchCount(isUpright, pipe.pipeTop, pipe.pipeHeight);
-        const branchLength = getBranchLength(isUpright, pipe.pipeTop, pipe.pipeHeight);
+        const topBranchCount = getBranchCount(pipe.topPipeHeight);
+        const bottomBranchCount = getBranchCount(pipe.bottomPipeHeight);
+        const responsivePipeWidth = getResponsiveSize(PIPE_WIDTH);
+        const responsivePipeHeadWidth = getResponsiveSize(PIPE_HEAD_WIDTH);
+        const responsivePipeHeadHeight = getResponsiveSize(PIPE_HEAD_HEIGHT);
 
         return (
-          <div
-            key={i}
-            style={{
-              position: "absolute",
-              left: pipe.pipeLeft,
-              top: isUpright ? pipe.pipeTop : 0,
-              bottom: !isUpright ? `calc(100vh - ${pipe.pipeTop + PIPE_HEAD_HEIGHT}px)` : undefined,
-              width: PIPE_WIDTH,
-              zIndex: 1,
-              display: "flex",
-              flexDirection: isUpright ? "column" : "column-reverse",
-              alignItems: "center",
-              pointerEvents: "none",
-              opacity: fade ? 0.7 : 1,
-              transition: "opacity 0.4s",
-            }}
-          >
-            {/* pipe head */}
+          <div key={i}>
+            {/* Top pipe */}
             <div
               style={{
-                width: PIPE_HEAD_WIDTH,
-                height: PIPE_HEAD_HEIGHT,
+                position: "absolute",
+                left: pipe.pipeLeft,
+                top: "0vh",
+                width: responsivePipeWidth,
+                height: pipe.topPipeHeight,
+                zIndex: 1,
                 display: "flex",
-                justifyContent: "center",
+                flexDirection: "column-reverse",
                 alignItems: "center",
-                marginBottom: isUpright ? 0 : -5,
-                marginTop: isUpright ? -5 : 0,
-                transform: isUpright ? "none" : "scaleY(-1)",
-                pointerEvents: "auto",
+                pointerEvents: "none",
+                opacity: fade ? 0.7 : 1,
+                transition: "opacity 0.4s",
               }}
             >
-              <Image
-                src="/images/pipehead.png"
-                alt="Pipe head"
-                width={PIPE_HEAD_WIDTH}
-                height={PIPE_HEAD_HEIGHT}
+              {/* Top pipe head (inverted) */}
+              <div
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
+                  width: responsivePipeHeadWidth,
+                  height: responsivePipeHeadHeight,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  transform: "scaleY(-1)",
+                  pointerEvents: "auto",
+                  marginTop: -5,
                 }}
-              />
-            </div>
-            {/* pipe branches */}
-            <div
-              style={{
-                width: PIPE_WIDTH,
-                height: branchLength,
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                pointerEvents: "auto",
-              }}
-            >
-              {Array.from({ length: branchCount }).map((_, idx) => (
+              >
                 <Image
-                  key={idx}
-                  src="/images/pipebranch.png"
-                  alt="Pipe body"
-                  width={PIPE_WIDTH}
-                  height={PIPE_BRANCH_HEIGHT}
+                  src="/images/pipehead.png"
+                  alt="Pipe head"
+                  width={responsivePipeHeadWidth}
+                  height={responsivePipeHeadHeight}
                   style={{
                     width: "100%",
-                    height: PIPE_BRANCH_HEIGHT,
-                    position: "absolute",
-                    top: isUpright ? idx * PIPE_BRANCH_HEIGHT : undefined,
-                    bottom: !isUpright ? idx * PIPE_BRANCH_HEIGHT : undefined,
+                    height: "100%",
+                    objectFit: "cover",
                   }}
                 />
-              ))}
+              </div>
+              {/* Top pipe branches */}
+              <div
+                style={{
+                  width: responsivePipeWidth,
+                  height: `calc(${pipe.topPipeHeight} - ${responsivePipeHeadHeight}px)`,
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  pointerEvents: "auto",
+                }}
+              >
+                {Array.from({ length: topBranchCount }).map((_, idx) => (
+                  <Image
+                    key={idx}
+                    src="/images/pipebranch.png"
+                    alt="Pipe body"
+                    width={responsivePipeWidth}
+                    height={PIPE_BRANCH_HEIGHT}
+                    style={{
+                      width: "100%",
+                      height: PIPE_BRANCH_HEIGHT,
+                      position: "absolute",
+                      bottom: idx * PIPE_BRANCH_HEIGHT,
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Bottom pipe */}
+            <div
+              style={{
+                position: "absolute",
+                left: pipe.pipeLeft,
+                bottom: "0vh",
+                width: responsivePipeWidth,
+                height: pipe.bottomPipeHeight,
+                zIndex: 1,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                pointerEvents: "none",
+                opacity: fade ? 0.7 : 1,
+                transition: "opacity 0.4s",
+              }}
+            >
+              {/* Bottom pipe head */}
+              <div
+                style={{
+                  width: responsivePipeHeadWidth,
+                  height: responsivePipeHeadHeight,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  pointerEvents: "auto",
+                  marginBottom: -5,
+                }}
+              >
+                <Image
+                  src="/images/pipehead.png"
+                  alt="Pipe head"
+                  width={responsivePipeHeadWidth}
+                  height={responsivePipeHeadHeight}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+              {/* Bottom pipe branches */}
+              <div
+                style={{
+                  width: responsivePipeWidth,
+                  height: `calc(${pipe.bottomPipeHeight} - ${responsivePipeHeadHeight}px)`,
+                  position: "relative",
+                  display: "flex",
+                  flexDirection: "column",
+                  pointerEvents: "auto",
+                }}
+              >
+                {Array.from({ length: bottomBranchCount }).map((_, idx) => (
+                  <Image
+                    key={idx}
+                    src="/images/pipebranch.png"
+                    alt="Pipe body"
+                    width={responsivePipeWidth}
+                    height={PIPE_BRANCH_HEIGHT}
+                    style={{
+                      width: "100%",
+                      height: PIPE_BRANCH_HEIGHT,
+                      position: "absolute",
+                      top: idx * PIPE_BRANCH_HEIGHT,
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         );
       })}
 
-      {/* social icons */}
+      {/* responsive social icons */}
       {icons.map((icon, i) => (
         <a
           key={i}
@@ -330,14 +409,29 @@ export default function SocialPage() {
             top: icon.top,
             zIndex: 2,
             opacity: fade ? 0.7 : 1,
-            transition: "opacity 0.4s",
+            transition: "opacity 0.4s, transform 0.2s",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
           }}
         >
-          <Image src={icon.src} alt={icon.alt} width={icon.width} height={icon.height} />
+          <Image 
+            src={icon.src} 
+            alt={icon.alt} 
+            width={getResponsiveSize(icon.width)} 
+            height={getResponsiveSize(icon.height)}
+            style={{
+              maxWidth: "8vw",
+              height: "auto",
+            }}
+          />
         </a>
       ))}
 
-      {/* flappy bird with toggle switch */}
+      {/* responsive flappy*/}
       <div
         style={{
           position: "absolute",
@@ -352,34 +446,47 @@ export default function SocialPage() {
         <Image
           src={bird.src}
           alt={bird.alt}
-          width={bird.width}
-          height={bird.height}
+          width={getResponsiveSize(bird.width)}
+          height={getResponsiveSize(bird.height)}
           style={{
             cursor: "pointer",
             filter: fade ? "brightness(0.7)" : "none",
-            transition: "filter 0.4s",
+            transition: "filter 0.4s, transform 0.2s",
+            maxWidth: "10vw",
+            height: "auto",
           }}
-          onClick={handleToggle}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.transform = "scale(1.1)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.transform = "scale(1)";
+          }}
           title="Toggle light/dark mode"
         />
       </div>
 
-      {/* pacman style menu button,can be hooked to an actual nav later */}
+      {/* responsive pacman menu button */}
       <button
         aria-label="Open menu"
         style={{
           position: "fixed",
-          bottom: 30,
-          right: 30,
+          bottom: "3vh",
+          right: "3vw",
           zIndex: 10,
           background: "none",
           border: "none",
           padding: 0,
           cursor: "pointer",
+          transition: "transform 0.2s",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = "scale(1.1)";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "scale(1)";
         }}
         tabIndex={0}
       >
-        <Image src="/PacMan.gif" alt="Menu" width={40} height={50} />           
       </button>                         
     </div>
   );
