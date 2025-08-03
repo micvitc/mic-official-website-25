@@ -9,9 +9,7 @@ import {
   OrbitControls,
 } from "@react-three/drei";
 
-type Props = {};
-
-const ModelScene = (props: Props) => {
+const ModelScene = () => {
   return (
     <Canvas
       style={{
@@ -29,7 +27,7 @@ const ModelScene = (props: Props) => {
   );
 };
 
-const RotatingModel = (props: Props) => {
+const RotatingModel = () => {
   const ref = useRef<THREE.Group>(null);
 
   const speed = useRef({
@@ -54,7 +52,6 @@ const RotatingModel = (props: Props) => {
         (Math.PI / 4) * 1.1,
       ]}
       ref={ref}
-      {...props}
     />
   );
 };

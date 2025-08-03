@@ -47,7 +47,7 @@
     }
 
     return (
-        <div className="fixed bottom-10 right-4 z-40 w-90  ">
+        <div className="fixed bottom-10 right-4 z-50 w-90  ">
         
             <Image 
                 src="/navbar_background.svg"

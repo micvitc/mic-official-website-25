@@ -78,6 +78,7 @@ const Cloud = memo(({ config }: { config: CloudFloatOptions }) => {
     />
   );
 });
+Cloud.displayName = 'Cloud';
 
 // Main component
 const ProjectsPage: React.FC = () => {

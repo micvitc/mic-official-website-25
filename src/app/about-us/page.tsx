@@ -418,7 +418,7 @@ const AboutUsPage: React.FC = () => {
           left: 0;
           bottom: 0;
           width: 100vw;
-          z-index: 100;
+          z-index: 40;
           pointer-events: none;
           user-select: none;
         }
