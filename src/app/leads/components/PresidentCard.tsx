@@ -12,7 +12,7 @@ interface PresidentCardProps {
  * Uses president.svg as the card background, overlays the name, leaves a blank image area,
  * and places stars.svg at the bottom, all at exact pixel dimensions.
  */
-const PresidentCard: React.FC<PresidentCardProps> = ({ name , imageSrc }) => {
+const PresidentCard: React.FC<PresidentCardProps> = ({ name = 'Eshaan', imageSrc = '/images/mic_board/president_eshaan.jpg' }) => {
   // SVG dimensions from president.svg
   const CARD_WIDTH = 327;
   const CARD_HEIGHT = 279;
@@ -51,7 +51,7 @@ const PresidentCard: React.FC<PresidentCardProps> = ({ name , imageSrc }) => {
 
       {/* IMAGE: Insert the President's image here. To add an image, pass the 'imageSrc' prop. */}
       <div
-        className="absolute z-10 bg-gray-300 rounded-[12px] border border-gray-400"
+        className="absolute z-10 bg-gray-300 rounded-[12px] border border-gray-400 overflow-hidden"
         style={{ left: IMAGE_X, top: IMAGE_Y, width: IMAGE_W, height: IMAGE_H, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         {/* If imageSrc is provided, show the image. Otherwise, keep blank. */}
@@ -59,9 +59,14 @@ const PresidentCard: React.FC<PresidentCardProps> = ({ name , imageSrc }) => {
           <Image
             src={imageSrc}
             alt="President Profile"
-            width={IMAGE_W}
-            height={IMAGE_H}
+            width={IMAGE_W * 1.3}
+            height={IMAGE_H * 1.3}
             className="object-cover w-full h-full rounded-[12px]"
+            style={{
+              transform: 'scale(1.1)',          // Zoom in by 20%
+              transformOrigin: 'center center',
+              objectPosition: '+2px center', // Center the image
+            }}
           />
         ) : null}
       </div>
