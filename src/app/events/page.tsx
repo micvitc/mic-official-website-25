@@ -4,54 +4,54 @@ import React, { useState, useEffect } from "react";
 
 const events = [
   {
-    title: "Event Name",
-    desc: "This is the info text for the first event. Add more details here.",
-    details: "Here are even more details about the first event. Add schedule, rules, images, or anything else here.",
+    title: "Cyber Security Treasure Hunt",
+    desc: "The event emphasized critical thinking, time management, and cybersecurity fundamentals",
+    details: "The Microsoft Innovation Club hosted an exciting “Cyber Security Treasure Hunt,” where participants engaged in clue-based challenges, quizzes, and problem-solving tasks. The event emphasized critical thinking, time management, and cybersecurity fundamentals. Teams followed a trail of hints to reach final answers, making for a fun and educational experience that concluded with the announcement of the winning teams.",
     bg: "bg-[#FFDFE8]",
     border: "border-[#E8A2B5]",
     text: "text-[#6d1c22]",
     borderColor: "#E8A2B5",
   },
   {
-    title: "Event Name",
-    desc: "This is the info text for the second event. Add more details here.",
-    details: "Here are even more details about the second event. Add schedule, rules, images, or anything else here.",
+    title: "Sherlock IT!",
+    desc: "Campus-wide puzzle hunt filled with engaging minigames and mystery-based challenges. ",
+    details: "“Sherlock IT!”, held during Pre-Vibrance by the Microsoft Innovations Club, was a campus-wide puzzle hunt filled with engaging minigames and mystery-based challenges. Participants solved interconnected clues that unraveled an overarching storyline. The event blended problem-solving with fun, encouraging teamwork and critical thinking while creating a memorable, interactive experience across the VIT Chennai campus.",
     bg: "bg-[#C5FFD8]",
     border: "border-[#ABEEAB]",
     text: "text-[#095709]",
     borderColor: "#ABEEAB",
   },
   {
-    title: "Event Name",
-    desc: "This is the info text for the third event. Add more details here.",
-    details: "Here are even more details about the third event. Add schedule, rules, images, or anything else here.",
+    title: "VITopoly RUSH",
+    desc: "VITopoly Rush combined strategy, skill, and fun in a Monopoly-inspired competition.",
+    details: "Held on Day 1 of Vibrance 2025, VITopoly Rush combined strategy, skill, and fun in a Monopoly-inspired competition. Participants played campus-wide mini-games to earn in-game currency, which they later used in strategic Monopoly rounds. Points earned in these final rounds determined the winners. The event challenged resource management, decision-making, and competitive spirit in an exciting, two-phase format.",
     bg: "bg-[#CBF1FD]",
     border: "border-[#B3D9FF]",
     text: "text-[#0A3A6b]",
     borderColor: "#B3D9FF",
   },
   {
-    title: "Event Name",
-    desc: "This is the info text for the fourth event. Add more details here.",
-    details: "Here are even more details about the fourth event. Add schedule, rules, images, or anything else here.",
+    title: "How Hackers Really Hack 4.0",
+    desc: "This two-day event featured ethical hacking expert Sriram Kesavan, who shared real-world cybersecurity practices.",
+    details: "This two-day event featured ethical hacking expert Sriram Kesavan, who shared real-world cybersecurity practices. Day one included hands-on sessions on vulnerabilities and cyber defense, while day two hosted a thrilling 6-hour CTF contest. Participants applied their learning in competitive challenges, making it a comprehensive experience in practical cybersecurity.",
     bg: "bg-[#CBF1FD]",
     border: "border-[#B3D9FF]",
     text: "text-[#0A3A6b]",
     borderColor: "#B3D9FF",
   },
   {
-    title: "Event Name",
-    desc: "This is the info text for the fifth event. Add more details here.",
-    details: "Here are even more details about the fifth event. Add schedule, rules, images, or anything else here.",
+    title: "Season of AI: India",
+    desc: "This session explored India’s booming AI landscape and Microsoft's influence in it.",
+    details: "Led by Gold MLSA Deepthi Balasubramanian, this session explored India’s booming AI landscape and Microsoft's influence in it. Attendees learned about responsible AI, Generative AI applications, and tools like Microsoft Copilot and Azure AI Studio. Live demos gave hands-on exposure to Models-as-a-Service and AI integration, empowering students to explore and build innovative, responsible AI solutions.",
     bg: "bg-[#fff4dd]",
     border: "border-[#FFD782]",
     text: "text-[#865B00]",
     borderColor: "#FFD782",
   },
   {
-    title: "Event Name",
-    desc: "This is the info text for the sixth event. Add more details here.",
-    details: "Here are even more details about the sixth event. Add schedule, rules, images, or anything else here.",
+    title: "MLSA Explained",
+    desc: "This workshop provided a complete overview of the Microsoft Learn Student Ambassadors (MLSA) program.",
+    details: "This workshop provided a complete overview of the Microsoft Learn Student Ambassadors (MLSA) program. Speakers Sam Prince and Syed Omar shared insights into the program’s mission, benefits like Azure credits and LinkedIn Premium, and the application process. Attendees left motivated and informed about how to grow as student tech leaders through MLSA.",
     bg: "bg-[#ffdfe8]",
     border: "border-[#E8A2B5]",
     text: "text-[#6d1c22]",
@@ -221,8 +221,7 @@ const LandingPage = () => {
   };
 
   const getCardClass = (event: typeof events[0]) =>
-    `pixel-corners font-press-start ${event.bg} ${event.text} cursor-pointer transition-all duration-200${
-      openCard === null ? " hover:scale-105 hover:shadow-xl" : ""
+    `pixel-corners font-press-start ${event.bg} ${event.text} cursor-pointer transition-all duration-200${openCard === null ? " hover:scale-105 hover:shadow-xl" : ""
     }`;
 
   return (
@@ -337,14 +336,14 @@ const LandingPage = () => {
 
       {/* Main Heading */}
       <h1 className={`${themeColors.textColor} font-press-start z-10 text-center mt-14`}
-          style={{ fontSize: "min(5vw, 3rem)" }}>
+        style={{ fontSize: "min(5vw, 3rem)" }}>
         EVENTS
       </h1>
 
       <div className="flex flex-col items-center justify-center h-full w-full max-w-none px-4">
         {/* First row of 3 event boxes */}
         <div className="flex flex-row justify-center mb-2"
-             style={{ gap: "min(2vw, 32px)" }}>
+          style={{ gap: "min(2vw, 32px)" }}>
           {events.slice(0, 3).map((event, i) => (
             <div
               key={i}
@@ -368,7 +367,7 @@ const LandingPage = () => {
               <span style={{ fontSize: "min(1.6vw, 24px)" }}>{event.title}</span>
               <p
                 className="info-text font-normal mt-4"
-                style={{ 
+                style={{
                   fontFamily: "'IBM Plex Mono', monospace",
                   fontSize: "min(0.8vw, 12px)"
                 }}
@@ -381,7 +380,7 @@ const LandingPage = () => {
 
         {/* Pac-Man and Pellets */}
         <div className="relative flex items-center w-full h-12 mx-auto "
-             style={{ maxWidth: "min(63.2vw, 964px)" }}>
+          style={{ maxWidth: "min(63.2vw, 964px)" }}>
           <img
             src="/PacMan.gif"
             alt="Pac-Man"
@@ -423,7 +422,7 @@ const LandingPage = () => {
 
         {/* Second row of 3 event boxes */}
         <div className="flex flex-row justify-center mt-2 mb-16"
-             style={{ gap: "min(2vw, 32px)" }}>
+          style={{ gap: "min(2vw, 32px)" }}>
           {events.slice(3, 6).map((event, i) => (
             <div
               key={i + 3}
@@ -447,7 +446,7 @@ const LandingPage = () => {
               <span style={{ fontSize: "min(1.6vw, 24px)" }}>{event.title}</span>
               <p
                 className="info-text font-normal mt-4"
-                style={{ 
+                style={{
                   fontFamily: "'IBM Plex Mono', monospace",
                   fontSize: "min(0.8vw, 12px)"
                 }}
@@ -460,11 +459,11 @@ const LandingPage = () => {
 
         {/* Vertical Dots Right */}
         <div className="absolute flex flex-col z-50"
-             style={{
-               top: "34vh",
-               right: "5.2vw",
-               gap: "min(1vh, 14px)"
-             }}>
+          style={{
+            top: "34vh",
+            right: "5.2vw",
+            gap: "min(1vh, 14px)"
+          }}>
           {[...Array(5)].map((_, i) => (
             <div
               key={`v-dot-${i}`}
@@ -479,11 +478,11 @@ const LandingPage = () => {
 
         {/* Vertical Dots Left */}
         <div className="absolute flex flex-col z-50"
-             style={{
-               top: "48vh",
-               left: "5.2vw",
-               gap: "min(1vh, 14px)"
-             }}>
+          style={{
+            top: "48vh",
+            left: "5.2vw",
+            gap: "min(1vh, 14px)"
+          }}>
           {[...Array(2)].map((_, i) => (
             <div
               key={`left-dot-${i}`}
@@ -537,30 +536,30 @@ const LandingPage = () => {
 
       {/* Responsive Borders */}
       <div className="absolute top-6 left-6 right-6 z-40"
-           style={{ 
-             height: "min(0.5vh, 8px)",
-             backgroundColor: themeColors.borderColor
-           }}></div>
+        style={{
+          height: "min(0.5vh, 8px)",
+          backgroundColor: themeColors.borderColor
+        }}></div>
       <div className="absolute bottom-6 left-6 right-6 z-40"
-           style={{ 
-             height: "min(0.5vh, 8px)",
-             backgroundColor: themeColors.borderColor
-           }}></div>
+        style={{
+          height: "min(0.5vh, 8px)",
+          backgroundColor: themeColors.borderColor
+        }}></div>
       <div className="absolute top-6 bottom-6 left-6 z-40"
-           style={{ 
-             width: "min(0.5vw, 8px)",
-             backgroundColor: themeColors.borderColor
-           }}></div>
+        style={{
+          width: "min(0.5vw, 8px)",
+          backgroundColor: themeColors.borderColor
+        }}></div>
       <div className="absolute top-6 bottom-6 right-6 z-40"
-           style={{ 
-             width: "min(0.5vw, 8px)",
-             backgroundColor: themeColors.borderColor
-           }}></div>
+        style={{
+          width: "min(0.5vw, 8px)",
+          backgroundColor: themeColors.borderColor
+        }}></div>
 
       {/* Modal Overlay */}
       {renderOverlay()}
 
-    
+
     </div>
   );
 };
