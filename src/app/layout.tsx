@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
-import ConditionalNavbar from "@/components/ConditionalNavbar";
 
 const pressStart2P = Press_Start_2P({
   weight: "400",
@@ -23,7 +22,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${pressStart2P.variable} antialiased`}>
         {children}
-        <ConditionalNavbar />
       </body>
     </html>
   );
