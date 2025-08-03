@@ -58,6 +58,7 @@ const whiteDotsSvg = (
   </svg>
 );
 
+
 const textPngUrl = "/images/you-died-404.png"; // Place your PNG text in public/images/you-died-404.png
 
 const NotFoundPage: React.FC = () => {
@@ -117,7 +118,7 @@ const NotFoundPage: React.FC = () => {
         <Image src="/images/cloud3.png" alt="Cloud 5" width={204} height={125} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 604.98, baseLeft: 1331, amplitude: 32, speed: 1.0, phase: 4 }), zIndex: 2 }} />
         <Image src="/images/cloud2.png" alt="Cloud 6" width={388} height={254} style={{ position: 'absolute', ...useCloudFloat({ baseTop: 127.98, baseLeft: 1142, amplitude: 27, speed: 1.3, phase: 5 }), zIndex: 2 }} />
         <Image src="/images/cloud1.png" alt="Cloud 7" width={355} height={228} style={{ position: 'absolute', ...useCloudFloat({ baseTop: -23, baseLeft: 847, amplitude: 22, speed: 1.05, phase: 6 }), zIndex: 2 }} />
-        
+
         {/* Dot on right edge above clouds */}
         <div style={{ position: 'absolute', top: 80, right: 40, zIndex: 10 }}>
           <Image src="/images/dot.png" alt="Star" width={8} height={8} />

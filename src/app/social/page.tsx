@@ -220,7 +220,7 @@ export default function SocialPage() {
         />
       ))}
 
-    
+
 
       {/* Flappy Bird style pipes */}
       {pipes.map((pipe, i) => {

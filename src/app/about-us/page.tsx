@@ -323,7 +323,7 @@ const AboutUsPage: React.FC = () => {
           paddingBottom: '190px',  // <-- increased paddingBottom to avoid overlap with footer
         }}
       >
-       
+
 
         {cloudPositions.map((pos, idx) => (
           <Image
@@ -418,7 +418,7 @@ const AboutUsPage: React.FC = () => {
           left: 0;
           bottom: 0;
           width: 100vw;
-          z-index: 40;
+
           pointer-events: none;
           user-select: none;
         }

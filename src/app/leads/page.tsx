@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import TeamMemberCard from './components/TeamMemberCard';
 import PresidentCard from './components/PresidentCard';
 import VicePresidentCard from './components/VicePresidentCard';
 import ManagementSecCard from './components/ManagementSecCard';
@@ -9,6 +10,13 @@ import TechSecCard from './components/TechSecCard';
 import NonTechSecCard from './components/NonTechSecCard';
 
 // Floating cloud animation hook
+interface CloudFloatOptions {
+  baseTop: string | number;
+  baseLeft: string | number;
+  amplitude?: number;
+  speed?: number;
+  phase?: number;
+}
 interface CloudFloatOptions {
   baseTop: string | number;
   baseLeft: string | number;
@@ -42,29 +50,29 @@ const MeetTheBoardPage: React.FC = () => {
   const [view, setView] = useState<'board' | 'departments'>('board');
   const [isDarkMode, setIsDarkMode] = useState(false);
   
-  // Cloud animations hooks - call at top level
-  const c1 = useCloudFloat({ baseTop: 154, baseLeft: -12, amplitude: 25, speed: 0.8, phase: 0 });
-  const c2 = useCloudFloat({ baseTop: 466, baseLeft: 22, amplitude: 35, speed: 1.1, phase: 1 });
-  const c3 = useCloudFloat({ baseTop: 700, baseLeft: 232, amplitude: 30, speed: 0.9, phase: 2 });
-  const c4 = useCloudFloat({ baseTop: 790, baseLeft: 1003, amplitude: 28, speed: 1.2, phase: 3 });
-  const c5 = useCloudFloat({ baseTop: 604.98, baseLeft: 1331, amplitude: 32, speed: 1.0, phase: 4 });
-  const c6 = useCloudFloat({ baseTop: 127.98, baseLeft: 1142, amplitude: 27, speed: 1.3, phase: 5 });
-  const c7 = useCloudFloat({ baseTop: -23, baseLeft: 1500, amplitude: 22, speed: 1.05, phase: 6 });
-  const c8 = useCloudFloat({ baseTop: 604.98, baseLeft: 1400, amplitude: 32, speed: 1.0, phase: 4 });
-  const c9 = useCloudFloat({ baseTop: 127.98, baseLeft: 1600, amplitude: 27, speed: 1.3, phase: 5 });
-  const c10 = useCloudFloat({ baseTop: 600, baseLeft: 1600, amplitude: 22, speed: 1.05, phase: 6 });
+    // Detect system theme preference
+    useEffect(() => {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      setIsDarkMode(mediaQuery.matches);
   
-  // Detect system theme preference
+      const handleChange = (e: MediaQueryListEvent) => {
+        setIsDarkMode(e.matches);
+      };
+  
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }, []);
+
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
     setIsDarkMode(mediaQuery.matches);
-
     const handleChange = (e: MediaQueryListEvent) => {
       setIsDarkMode(e.matches);
     };
-
     mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
   }, []);
 
     useEffect(() => {
@@ -144,18 +152,32 @@ const MeetTheBoardPage: React.FC = () => {
       }}
       >
       {/* Clouds (absolute, behind content) */}
-      <>
-        <Image src="/images/cloud1.png" alt="Cloud 1" width={355} height={228} style={{ position: 'absolute', ...c1, zIndex: 2 }} />
-        <Image src="/images/cloud2.png" alt="Cloud 2" width={367} height={219} style={{ position: 'absolute', ...c2, zIndex: 2 }} />
-        <Image src="/images/cloud1.png" alt="Cloud 3" width={355} height={228} style={{ position: 'absolute', ...c3, zIndex: 2 }} />
-        <Image src="/images/cloud3.png" alt="Cloud 4" width={204} height={125} style={{ position: 'absolute', ...c4, zIndex: 2 }} />
-        <Image src="/images/cloud3.png" alt="Cloud 5" width={204} height={125} style={{ position: 'absolute', ...c5, zIndex: 2 }} />
-        <Image src="/images/cloud2.png" alt="Cloud 6" width={388} height={254} style={{ position: 'absolute', ...c6, zIndex: 2 }} />
-        <Image src="/images/cloud1.png" alt="Cloud 7" width={355} height={228} style={{ position: 'absolute', ...c7, zIndex: 2 }} />
-        <Image src="/images/cloud3.png" alt="Cloud 8" width={204} height={125} style={{ position: 'absolute', ...c8, zIndex: 2 }} />
-        <Image src="/images/cloud2.png" alt="Cloud 9" width={388} height={254} style={{ position: 'absolute', ...c9, zIndex: 2 }} />
-        <Image src="/images/cloud1.png" alt="Cloud 10" width={355} height={228} style={{ position: 'absolute', ...c10, zIndex: 2 }} />
-      </>
+      {(() => {
+        const c1 = useCloudFloat({ baseTop: 154, baseLeft: -12, amplitude: 25, speed: 0.8, phase: 0 });
+        const c2 = useCloudFloat({ baseTop: 466, baseLeft: 22, amplitude: 35, speed: 1.1, phase: 1 });
+        const c3 = useCloudFloat({ baseTop: 700, baseLeft: 232, amplitude: 30, speed: 0.9, phase: 2 });
+        const c4 = useCloudFloat({ baseTop: 790, baseLeft: 1003, amplitude: 28, speed: 1.2, phase: 3 });
+        const c5 = useCloudFloat({ baseTop: 604.98, baseLeft: 1331, amplitude: 32, speed: 1.0, phase: 4 });
+        const c6 = useCloudFloat({ baseTop: 127.98, baseLeft: 1142, amplitude: 27, speed: 1.3, phase: 5 });
+        const c7 = useCloudFloat({ baseTop: -23, baseLeft: 1500, amplitude: 22, speed: 1.05, phase: 6 });
+        const c8 = useCloudFloat({ baseTop: 604.98, baseLeft: 1400, amplitude: 32, speed: 1.0, phase: 4 });
+        const c9 = useCloudFloat({ baseTop: 127.98, baseLeft: 1600, amplitude: 27, speed: 1.3, phase: 5 });
+        const c10 = useCloudFloat({ baseTop: 600, baseLeft: 1600, amplitude: 22, speed: 1.05, phase: 6 });
+
+        
+        return <>
+          <Image src="/images/cloud1.png" alt="Cloud 1" width={355} height={228} style={{ position: 'absolute', ...c1, zIndex: 2 }} />
+          <Image src="/images/cloud2.png" alt="Cloud 2" width={367} height={219} style={{ position: 'absolute', ...c2, zIndex: 2 }} />
+          <Image src="/images/cloud1.png" alt="Cloud 3" width={355} height={228} style={{ position: 'absolute', ...c3, zIndex: 2 }} />
+          <Image src="/images/cloud3.png" alt="Cloud 4" width={204} height={125} style={{ position: 'absolute', ...c4, zIndex: 2 }} />
+          <Image src="/images/cloud3.png" alt="Cloud 5" width={204} height={125} style={{ position: 'absolute', ...c5, zIndex: 2 }} />
+          <Image src="/images/cloud2.png" alt="Cloud 6" width={388} height={254} style={{ position: 'absolute', ...c6, zIndex: 2 }} />
+          <Image src="/images/cloud1.png" alt="Cloud 7" width={355} height={228} style={{ position: 'absolute', ...c7, zIndex: 2 }} />
+          <Image src="/images/cloud3.png" alt="Cloud 8" width={204} height={125} style={{ position: 'absolute', ...c8, zIndex: 2 }} />
+          <Image src="/images/cloud2.png" alt="Cloud 9" width={388} height={254} style={{ position: 'absolute', ...c9, zIndex: 2 }} />
+          <Image src="/images/cloud1.png" alt="Cloud 10" width={355} height={228} style={{ position: 'absolute', ...c10, zIndex: 2 }} />
+        </>;
+      })()}
 
 
       {/* Main Heading */}
@@ -252,4 +274,8 @@ const MeetTheBoardPage: React.FC = () => {
   );
 };
 
-export default MeetTheBoardPage;
+export default MeetTheBoardPage; 
+
+function setIsDarkMode(matches: boolean) {
+  throw new Error('Function not implemented.');
+}

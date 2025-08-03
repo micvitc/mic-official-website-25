@@ -270,6 +270,7 @@ const LoadingPage: React.FC = () => {
         fontFamily: "'Press Start 2P', monospace",
       }}
     >
+
       <ClubLogo />
       <ContentBox inputText={inputText} setInputText={setInputText} loadingProgress={loadingProgress} />
       <Clouds clouds={cloudPositions} />
