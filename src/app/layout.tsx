@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Press_Start_2P } from "next/font/google";
 import "./globals.css";
+import ConditionalNavbar from "@/components/ConditionalNavbar";
 
 const pressStart2P = Press_Start_2P({
   weight: "400",
@@ -13,7 +14,6 @@ export const metadata: Metadata = {
   description: "Welcome to the official website of the Microsoft Innovation Club at VIT Chennai.",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,10 +21,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${pressStart2P.variable} antialiased`}
-      >
+      <body className={`${pressStart2P.variable} antialiased`}>
         {children}
+        <ConditionalNavbar />
       </body>
     </html>
   );
