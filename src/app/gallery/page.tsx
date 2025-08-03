@@ -79,6 +79,7 @@ const Cloud = memo(({ config }: { config: CloudFloatOptions }) => {
   );
 });
 
+
 // Main component
 const GalleryPage: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);

@@ -51,18 +51,7 @@ const themeStyles = (isDarkMode: boolean) => ({
   gridOpacity: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.3)',
 });
 
-const Logo = () => (
-  <Link href="/" passHref>
-    <Image
-      src="/images/mic-logo.png"
-      alt="MIC Logo"
-      width={80}
-      height={80}
-      style={{ position: 'absolute', top: 20, left: 20, zIndex: 50, cursor: 'pointer' }}
-      priority
-    />
-  </Link>
-);
+
 
 const ClubLogo = () => (
   <div
@@ -281,7 +270,7 @@ const LoadingPage: React.FC = () => {
         fontFamily: "'Press Start 2P', monospace",
       }}
     >
-      <Logo />
+
       <ClubLogo />
       <ContentBox inputText={inputText} setInputText={setInputText} loadingProgress={loadingProgress} />
       <Clouds clouds={cloudPositions} />

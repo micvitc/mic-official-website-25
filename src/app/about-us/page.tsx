@@ -323,16 +323,7 @@ const AboutUsPage: React.FC = () => {
           paddingBottom: '190px',  // <-- increased paddingBottom to avoid overlap with footer
         }}
       >
-        <Link href="/" passHref>
-          <Image
-            src="/images/mic-logo.png"
-            alt="MIC Logo"
-            width={80}
-            height={80}
-            style={{ position: 'absolute', top: 20, left: 20, zIndex: 50, cursor: 'pointer' }}
-            priority
-          />
-        </Link>
+
 
         {cloudPositions.map((pos, idx) => (
           <Image
@@ -427,7 +418,7 @@ const AboutUsPage: React.FC = () => {
           left: 0;
           bottom: 0;
           width: 100vw;
-          z-index: 100;
+
           pointer-events: none;
           user-select: none;
         }
