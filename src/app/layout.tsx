@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   description: "Welcome to the official website of the Microsoft Innovation Club at VIT Chennai.",
 };
 
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,9 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${pressStart2P.variable} antialiased`}
-      >
+      <body className={`${pressStart2P.variable} antialiased`}>
         {children}
       </body>
     </html>
