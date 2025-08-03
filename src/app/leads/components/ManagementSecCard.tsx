@@ -12,7 +12,7 @@ interface ManagementSecCardProps {
  * Uses managementsec.svg as the card background, overlays the name, leaves a blank image area.
  * The stars are already part of the SVG, so no extra overlay is needed.
  */
-const ManagementSecCard: React.FC<ManagementSecCardProps> = ({ name, imageSrc }) => {
+const ManagementSecCard: React.FC<ManagementSecCardProps> = ({ name, imageSrc ='/images/mic_board/mgsec_raina.jpg' }) => {
   // SVG dimensions from managementsec.svg
   const CARD_WIDTH = 327;
   const CARD_HEIGHT = 279;
@@ -51,7 +51,7 @@ const ManagementSecCard: React.FC<ManagementSecCardProps> = ({ name, imageSrc })
 
       {/* IMAGE: Insert the Management Secretary's image here. To add an image, pass the 'imageSrc' prop. */}
       <div
-        className="absolute z-10 bg-gray-300 rounded-[12px] border border-gray-400"
+        className="absolute z-10 bg-gray-300 rounded-[12px] border border-gray-400 overflow-hidden"
         style={{ left: IMAGE_X, top: IMAGE_Y, width: IMAGE_W, height: IMAGE_H, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         {/* If imageSrc is provided, show the image. Otherwise, keep blank. */}
@@ -62,6 +62,11 @@ const ManagementSecCard: React.FC<ManagementSecCardProps> = ({ name, imageSrc })
             width={IMAGE_W}
             height={IMAGE_H}
             className="object-cover w-full h-full rounded-[12px]"
+            style={{
+              transform: 'scale(1.2)',          // Zoom in by 20%
+              transformOrigin: 'center center',
+              objectPosition: '+2px center', // Center the image
+            }}
           />
         ) : null}
       </div>

@@ -12,7 +12,7 @@ interface TechSecCardProps {
  * Uses techsec.svg as the card background, overlays the name, leaves a blank image area.
  * The stars are already part of the SVG, so no extra overlay is needed.
  */
-const TechSecCard: React.FC<TechSecCardProps> = ({ name, imageSrc }) => {
+const TechSecCard: React.FC<TechSecCardProps> = ({ name, imageSrc = '/images/mic_board/techsec_mannat.jpg' }) => {
   // SVG dimensions from techsec.svg
   const CARD_WIDTH = 327;
   const CARD_HEIGHT = 279;
@@ -51,7 +51,7 @@ const TechSecCard: React.FC<TechSecCardProps> = ({ name, imageSrc }) => {
 
       {/* IMAGE: Insert the Tech Secretary's image here. To add an image, pass the 'imageSrc' prop. */}
       <div
-        className="absolute z-10 bg-gray-300 rounded-[12px] border border-gray-400"
+        className="absolute z-10 bg-gray-300 rounded-[12px] border border-gray-400 overflow-hidden"
         style={{ left: IMAGE_X, top: IMAGE_Y, width: IMAGE_W, height: IMAGE_H, display: 'flex', alignItems: 'center', justifyContent: 'center' }}
       >
         {/* If imageSrc is provided, show the image. Otherwise, keep blank. */}
@@ -62,6 +62,11 @@ const TechSecCard: React.FC<TechSecCardProps> = ({ name, imageSrc }) => {
             width={IMAGE_W}
             height={IMAGE_H}
             className="object-cover w-full h-full rounded-[12px]"
+            style={{
+              transform: 'scale(1.075)',          // Zoom in by 7.5%
+              transformOrigin: 'center center',
+              objectPosition: '+2px center', // Center the image
+            }}
           />
         ) : null}
       </div>
