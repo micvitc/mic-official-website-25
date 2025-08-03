@@ -210,19 +210,19 @@ const LoadingPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setLoadingProgress(prev => {
-        const newProgress = prev + Math.random() * 2 + 1;
-        if (newProgress >= 100) {
-          clearInterval(interval);
-          return 100;
-        }
-        return newProgress;
-      });
-    }, 150);
+  const interval = setInterval(() => {
+    setLoadingProgress(prev => {
+      const newProgress = prev + Math.random() * 2 + 4; 
+      if (newProgress >= 100) {
+        clearInterval(interval);
+        return 100;
+      }
+      return newProgress;
+    });
+  }, 150);
 
-    return () => clearInterval(interval);
-  }, []);
+  return () => clearInterval(interval);
+}, []);
 
   useEffect(() => {
     const preventScroll = (e: Event) => e.preventDefault();

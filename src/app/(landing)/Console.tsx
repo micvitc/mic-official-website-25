@@ -13,7 +13,7 @@ export default function Console({
   showButtons?: boolean;
 }) {
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative ">
       <Image
         src={consoleImg}
         alt="Console"

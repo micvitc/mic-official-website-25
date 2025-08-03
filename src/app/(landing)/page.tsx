@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Cartridge from "./Cartridge";
 import Console from "./Console";
+import LoadingPage from "./loading";
 
 export default function Landing() {
   const [inserted, setInserted] = useState(false);
@@ -23,12 +24,12 @@ export default function Landing() {
       // After 1 second of booting up, show splash
       setTimeout(() => {
         setShowSplash(true);
-      }, 1000);
+      }, 500);
 
       // After another 2 seconds, go to /main
       setTimeout(() => {
-        router.push("/Loading");
-      }, 3000);
+        router.push("/main");
+      }, 5000);
     }
   };
 
@@ -102,12 +103,8 @@ export default function Landing() {
       {/* Splash screen overlay */}
       {showSplash && (
         <div className="absolute inset-0 bg-black flex flex-col items-center justify-center z-50">
-          <img
-            src="/images/mic-logo.png"
-            alt="MIC Logo"
-            className="w-24 h-24 animate-spin-slow mb-4"
-          />
-          <p className="text-white text-sm animate-pulse">Welcome to MIC</p>
+                  <LoadingPage/>
+
         </div>
       )}
     </div>
