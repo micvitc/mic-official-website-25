@@ -4,18 +4,7 @@ import ModelScene from "./_components/model-scene";
 import Image from "next/image";
 import Link from "next/link";
 
-const Logo = () => (
-  <Link href="/" >
-    <Image
-      src="/images/mic-logo.png"
-      alt="MIC Logo"
-      width={80}
-      height={80}
-      style={{ position: 'absolute', top: 20, left: 20, zIndex: 50, cursor: 'pointer' }}
-      priority
-    />
-  </Link>
-);
+
 
 const ClubLogo = () => (
   <div
@@ -194,7 +183,6 @@ const LandingPage = () => {
       </a>
       <a
         href="/leaderboard"
-        target="_blank"
         rel="noopener noreferrer"
         className="absolute bottom-12 left-11 z-50"
       >
@@ -208,7 +196,6 @@ const LandingPage = () => {
         />
       </a>
 
-      <Logo />
       <Clouds clouds={cloudPositions} />
       <ClubLogo />
       <Cube />

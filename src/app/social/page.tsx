@@ -220,26 +220,7 @@ export default function SocialPage() {
         />
       ))}
 
-      {/*  logo */}
-      <a
-        href="/main"
-        aria-label="Go to home"
-        style={{
-          position: "absolute",
-          top: "2vh",
-          left: "2vw",
-          zIndex: 2,
-          display: "inline-block",
-        }}
-      >
-        <Image
-          src="/images/mic-logo.png"
-          alt="MIC Logo"
-          width={Math.max(40, Math.min(60, screenSize.width * 0.04))}
-          height={Math.max(40, Math.min(60, screenSize.width * 0.04))}
-          priority
-        />
-      </a>
+    
 
       {/* Flappy Bird style pipes */}
       {pipes.map((pipe, i) => {
