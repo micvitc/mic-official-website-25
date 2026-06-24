@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 
 interface CloudFloatOptions {
   baseTop: number;
@@ -74,7 +73,7 @@ const ClubLogo = () => (
   </div>
 );
 
-const ContentBox = ({ inputText, setInputText,loadingProgress  }: { inputText: string; loadingProgress: number; setInputText: (val: string) => void }) => (
+const ContentBox = ({ inputText, loadingProgress }: { inputText: string; loadingProgress: number }) => (
   <div
     style={{
       position: 'absolute',
@@ -143,7 +142,7 @@ const ContentBox = ({ inputText, setInputText,loadingProgress  }: { inputText: s
       </p>
 
 
-       {/* Loading Bar */}
+      {/* Loading Bar */}
       <div
         style={{
           width: '90%',
@@ -186,7 +185,7 @@ const Clouds = ({ clouds }: { clouds: { top: number; left: number }[] }) => (
 
 const LoadingPage: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-    const [loadingProgress, setLoadingProgress] = useState(0);
+  const [loadingProgress, setLoadingProgress] = useState(0);
 
   const [inputText, setInputText] = useState('Welcome to the realm where tech meets adventure. Your journey begins now — build, break, and boss through the world of innovation.');
 
@@ -199,19 +198,19 @@ const LoadingPage: React.FC = () => {
   }, []);
 
   useEffect(() => {
-  const interval = setInterval(() => {
-    setLoadingProgress(prev => {
-      const newProgress = prev + Math.random() * 2 + 4; 
-      if (newProgress >= 100) {
-        clearInterval(interval);
-        return 100;
-      }
-      return newProgress;
-    });
-  }, 150);
+    const interval = setInterval(() => {
+      setLoadingProgress(prev => {
+        const newProgress = prev + Math.random() * 2 + 4;
+        if (newProgress >= 100) {
+          clearInterval(interval);
+          return 100;
+        }
+        return newProgress;
+      });
+    }, 150);
 
-  return () => clearInterval(interval);
-}, []);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     const preventScroll = (e: Event) => e.preventDefault();
@@ -223,15 +222,10 @@ const LoadingPage: React.FC = () => {
     document.addEventListener('wheel', preventZoom, { passive: false });
     document.addEventListener('keydown', preventKeyboardZoom);
     document.addEventListener('touchmove', preventScroll, { passive: false });
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
-
     return () => {
       document.removeEventListener('wheel', preventZoom);
       document.removeEventListener('keydown', preventKeyboardZoom);
       document.removeEventListener('touchmove', preventScroll);
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
     };
   }, []);
 
@@ -272,7 +266,7 @@ const LoadingPage: React.FC = () => {
     >
 
       <ClubLogo />
-      <ContentBox inputText={inputText} setInputText={setInputText} loadingProgress={loadingProgress} />
+      <ContentBox inputText={inputText} loadingProgress={loadingProgress} />
       <Clouds clouds={cloudPositions} />
     </div>
   );

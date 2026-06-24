@@ -1,17 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import consoleImg from "./assets/console.png";
+import consoleImg from "./assets/consoleoff.svg";
 
-export default function Console({
-  onPower,
-  onReset,
-  showButtons,
-}: {
-  onPower: () => void;
-  onReset: () => void;
-  showButtons?: boolean;
-}) {
+export default function Console() {
   return (
     <div className="w-full h-full relative ">
       <Image

@@ -1,8 +1,77 @@
 "use client";
+import React, { useState, useEffect, useRef } from "react";
+import Image from "next/image";
+import { useDarkMode } from "@/hooks/useDarkMode";
 
-import React, { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
+// Larger cloud images & new variety
+const cloudImages = [
+  "/images/cloud1.png",
+  "/images/cloud2.png",
+  "/images/cloud1.png",
+  "/images/cloud3.png",
+  "/images/cloud3.png",
+  "/images/cloud2.png",
+  "/images/cloud1.png",
+  "/images/cloud3.png",
+  "/images/cloud2.png",
+  "/images/cloud1.png",
+];
+
+interface CloudFloatOptions {
+  baseTop: number;
+  baseLeft: number;
+  amplitude?: number;
+  speed?: number;
+  phase?: number;
+}
+
+// Floating cloud animation hook
+function useCloudFloat({
+  baseTop,
+  baseLeft,
+  amplitude = 35,
+  speed = 1,
+  phase = 0,
+}: CloudFloatOptions) {
+  const [top, setTop] = useState(baseTop);
+  const frame = useRef(0);
+  useEffect(() => {
+    let running = true;
+    function animate() {
+      frame.current += 1;
+      const t = frame.current / 60;
+      setTop(baseTop + Math.sin(t * speed + phase) * amplitude);
+      if (running) requestAnimationFrame(animate);
+    }
+    animate();
+    return () => {
+      running = false;
+    };
+  }, [baseTop, amplitude, speed, phase]);
+  return { top, left: baseLeft };
+}
+
+function getThemeColors(isDarkMode: boolean) {
+  return isDarkMode
+    ? {
+      background: "linear-gradient(to bottom, #00040d 0%, #002855 100%)",
+      gridOpacity1: "rgba(255,255,255,0.09)",
+      gridOpacity2: "rgba(255,255,255,0.07)",
+      headingColor: "#fff",
+      headingTextShadow: "4px 4px 0 #000, 0 2px 8px #000",
+      starOpacity: 0.85,
+      cardTextColor: "#444",
+    }
+    : {
+      background: "linear-gradient(to bottom, #e0f2fe 0%, #87ceeb 100%)",
+      gridOpacity1: "rgba(255,255,255,0.3)",
+      gridOpacity2: "rgba(255,255,255,0.3)",
+      headingColor: "#1e293b",
+      headingTextShadow: "2px 2px 0 rgba(255,255,255,0.7), 0 1px 4px rgba(0,0,0,0.15)",
+      starOpacity: 0.4,
+      cardTextColor: "#333",
+    };
+}
 
 const MysteryCard = ({
   frameColor,
@@ -11,6 +80,7 @@ const MysteryCard = ({
   title,
   desc,
   style,
+  cardTextColor,
 }: {
   frameColor: string;
   innerColor: string;
@@ -18,70 +88,161 @@ const MysteryCard = ({
   title: string;
   desc: string;
   style?: React.CSSProperties;
+  cardTextColor?: string;
 }) => (
   <div
-    className="mystery-card group relative"
-    style={{ background: frameColor, borderColor: frameColor, boxShadow: `0 0 0 4px ${dotColor}50`, ...style }}
+    className="mystery-card group"
+    style={{
+      background: frameColor,
+      borderColor: frameColor,
+      boxShadow: `0 0 0 4px ${dotColor}50`,
+      ...style,
+    }}
   >
     <div className="inner-panel" style={{ background: innerColor }} />
     <div className="corner-dot top-left" style={{ background: dotColor }} />
     <div className="corner-dot top-right" style={{ background: dotColor }} />
     <div className="corner-dot bottom-left" style={{ background: dotColor }} />
     <div className="corner-dot bottom-right" style={{ background: dotColor }} />
+    <div className="fixed-title" style={{ color: dotColor }}>
+      <h3>{title}</h3>
+    </div>
+    <div className="scrollable-content" style={{ color: dotColor }}>
+      <p style={{ color: cardTextColor || "#444" }}>{desc}</p>
+    </div>
     <div className="hover-question">
       <span style={{ color: dotColor }}>?</span>
     </div>
-    <div className="hover-details" style={{ color: dotColor }}>
-      <h3>{title}</h3>
-      <p>{desc}</p>
+    <div className="scroll-down-arrow" aria-hidden>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12 5V19M12 19L5 12M12 19L19 12"
+          stroke={dotColor}
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
     </div>
+
     <style jsx>{`
       .mystery-card {
-        width: 300px;
-        height: 280px;
+ issue-10-Improve-Scroll-Indication-and-Box-Sizing-on-About-Us-Page
+        width: 314.1363220214844px;
+        height: 292.04864501953125px;
+        border: 8px solid;
+        border-radius: 6.95px;
+
+        width: 320px;
+        height: 290px;
         border: 10px solid;
-        border-radius: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 16px;
+        border-radius: 7px;
+        il: 0;
+
         position: relative;
+        display: flex;
+        flex-direction: column;
         opacity: 1;
         cursor: default;
         transition: all 0.3s ease;
-        box-shadow: 0 0 0 4px var(--dot-color-transparent, #00000050);
+        overflow: hidden;
+        margin: 0;
+        flex: 0 0 auto;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
       }
       .inner-panel {
         position: absolute;
-        left: 5px;
-        top: 5px;
-        right: 5px;
-        bottom: 5px;
-        border-radius: 15px;
+        left: 8px;
+        top: 8px;
+        right: 8px;
+        bottom: 8px;
+        border-radius: 4px;
+        left: 8px; top: 8px; right: 8px; bottom: 8px;
+        border-radius: 4px;
         z-index: 8;
       }
+
+      /* single, circular corner dot definition */
       .corner-dot {
-        width: 20px;
-        height: 20px;
+        width: 14px;
+        height: 14px;
         border-radius: 50%;
         position: absolute;
-        z-index: 3;
+        z-index: 12;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
+        border: 2px solid rgba(0, 0, 0, 0.12);
+        background-clip: padding-box;
       }
       .top-left {
-        top: 26px;
-        left: 26px;
+        top: 8px;
+        left: 8px;
       }
+
       .top-right {
-        top: 26px;
-        right: 26px;
+        top: 8px;
+        right: 8px;
       }
+
       .bottom-left {
-        bottom: 26px;
-        left: 26px;
+        bottom: 8px;
+        left: 8px;
       }
+
       .bottom-right {
-        bottom: 26px;
-        right: 26px;
+        bottom: 8px;
+        right: 8px;
+      }
+
+      .fixed-title {
+        position: absolute;
+        top: 22px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 25;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .fixed-title h3 {
+        font-family: "Press Start 2P", monospace;
+        font-weight: 700;
+        font-size: 1rem;
+        text-transform: capitalize;
+        text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
+        margin: 0;
+        letter-spacing: 1px;
+      }
+      .scrollable-content {
+        position: absolute;
+        top: 60px;
+        left: 24px;
+        right: 24px;
+        bottom: 40px;
+        z-index: 25;
+        overflow-y: auto;
+        pointer-events: auto;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        scrollbar-width: none;
+        padding-right: 8px;
+      }
+      .scrollable-content::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollable-content p {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 1.07rem;
+        color: #444;
+        line-height: 1.62;
+        margin: 0;
+        text-align: center;
       }
       .hover-question {
         position: absolute;
@@ -89,192 +250,138 @@ const MysteryCard = ({
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 4.5rem;
+        font-size: 4.2rem;
         font-weight: 900;
-        font-family: 'Press Start 2P', monospace;
+        font-family: "Press Start 2P", monospace;
         letter-spacing: 2px;
         user-select: none;
         margin-top: 10px;
         transition: opacity 0.3s ease;
         z-index: 20;
         pointer-events: none;
+        opacity: 1;
       }
-      .hover-details {
+      .scroll-down-arrow {
         position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 24px;
-        text-align: center;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 25;
+        animation: bounceDown 2s infinite;
         opacity: 0;
         transition: opacity 0.3s ease;
-        z-index: 30;
         pointer-events: none;
       }
+      @keyframes bounceDown {
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        40% {
+          transform: translateX(-50%) translateY(-8px);
+        }
+        60% {
+          transform: translateX(-50%) translateY(-4px);
+        }
+      }
+
       .group:hover .hover-question {
         opacity: 0;
       }
-      .group:hover .hover-details {
+      .group:hover .scroll-down-arrow {
         opacity: 1;
       }
-      .hover-details h3 {
-        font-family: 'Press Start 2P', monospace;
-        font-weight: 700;
-        font-size: 1.15rem;
-        text-transform: capitalize;
-        text-shadow: 2px 2px 0 #fff, 4px 4px 0 #000;
-        margin: 0 0 12px;
-        letter-spacing: 1px;
+      .group:hover .fixed-title {
+        opacity: 1;
       }
-      .hover-details p {
-        font-family: 'IBM Plex Mono', monospace;
-        font-size: 0.875rem;
-        color: #444;
-        line-height: 1.4;
-        margin: 0;
+      .group:hover .scrollable-content {
+        opacity: 1;
       }
-      @media (max-width: 1200px) {
-        .mystery-card {
-          width: 250px;
-          height: 235px;
-          margin: 14px;
-        }
-        .hover-question {
-          font-size: 4rem;
-        }
-        .hover-details h3 {
-          font-size: 1rem;
-        }
-        .hover-details p {
-          font-size: 0.8rem;
-        }
-      }
+
       @media (max-width: 900px) {
         .mystery-card {
-          width: 200px;
-          height: 190px;
-          margin: 12px;
+          width: 245px;
+          height: 205px;
         }
-        .hover-question {
-          font-size: 3rem;
+        .corner-dot {
+          width: 16px;
+          height: 16px;
         }
-        .hover-details h3 {
-          font-size: 0.85rem;
+        .top-left {
+          top: 13px;
+          left: 13px;
         }
-        .hover-details p {
-          font-size: 0.7rem;
+        .top-right {
+          top: 13px;
+          right: 13px;
+        }
+        .bottom-left {
+          bottom: 13px;
+          left: 13px;
+        }
+        .bottom-right {
+          bottom: 13px;
+          right: 13px;
+        }
+        .fixed-title h3 {
+          font-size: 1.07rem;
+        }
+        .fixed-title {
+          top: 10px;
+        }
+        .scrollable-content {
+          top: 42px;
+          left: 12px;
+          right: 12px;
+          bottom: 12px;
+        }
+        .scrollable-content p {
+          font-size: 0.92rem;
+          line-height: 1.24;
         }
       }
       @media (max-width: 600px) {
+        .cards-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 18px;
+        }
         .mystery-card {
-          width: 100%;
-          max-width: 300px;
-          height: auto;
-          margin: 12px auto;
+          width: 100% !important;
+          max-width: 320px !important;
+          height: auto !important;
+        }
+        .fixed-title h3 {
+          font-size: 1rem;
+        }
+        .scrollable-content {
+          top: 56px;
+        }
+        .scrollable-content p {
+          font-size: 0.86rem;
         }
       }
     `}</style>
   </div>
 );
 
-
-interface CloudFloatOptions {
-  baseTop: number;  // changed to number for calculation
-  baseLeft: number; 
-  amplitude?: number;
-  speed?: number;
-  phase?: number;
-}
-
-function useCloudFloat({ baseTop, baseLeft, amplitude = 30, speed = 1, phase = 0 }: CloudFloatOptions) {
-  const [top, setTop] = useState(baseTop);
-  const frame = useRef(0);
-
-  useEffect(() => {
-    let running = true;
-
-    function animate() {
-      frame.current += 1;
-      const t = frame.current / 60;
-
-      // Modify top calculation so cloud never goes below  window height - footer height - cloud height offset 
-      // Let's assume footer height ~172px and cloud height offset conservatively 130px
-      // So maxTop = window.innerHeight - 172 - 130 = window.innerHeight - 302 approx.
-      // We'll min-limit top to maxTop: if computed top > maxTop, clamp it
-
-      const maxTop = window.innerHeight - 302;
-
-      let newTop = baseTop + Math.sin(t * speed + phase) * amplitude;
-      if (newTop > maxTop) {
-        newTop = maxTop;
-      }
-
-      setTop(newTop);
-
-      if (running) requestAnimationFrame(animate);
-    }
-
-    animate();
-
-    return () => {
-      running = false;
-    };
-  }, [baseTop, amplitude, speed, phase]);
-
-  return { top, left: baseLeft };
-}
-
+// Star positions - scattered across the background
+const STAR_COUNT = 7;
+const STAR_POSITIONS = [
+  { top: 12, left: 8 },
+  { top: 10, left: 25 },
+  { top: 18, left: 42 },
+  { top: 14, left: 58 },
+  { top: 20, left: 72 },
+  { top: 8, left: 85 },
+  { top: 16, left: 95 },
+].map((pos) => ({ ...pos, size: Math.random() * 2 + 3 }));
 
 const AboutUsPage: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDarkMode(mediaQuery.matches);
-    const handleChange = (e: MediaQueryListEvent) => setIsDarkMode(e.matches);
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.margin = '0';
-    document.body.style.padding = '0';
-    document.body.style.minHeight = '100vh';
-    document.body.style.overflowX = 'hidden';
-    document.documentElement.style.minHeight = '100vh';
-    document.documentElement.style.overflowX = 'hidden';
-
-    const preventZoom = (e: WheelEvent) => {
-      if (e.ctrlKey) e.preventDefault();
-    };
-
-    const preventKeyboardZoom = (e: KeyboardEvent) => {
-      if (e.ctrlKey && ['+', '-', '0'].includes(e.key)) e.preventDefault();
-    };
-
-    document.addEventListener('wheel', preventZoom, { passive: false });
-    document.addEventListener('keydown', preventKeyboardZoom);
-
-    return () => {
-      document.removeEventListener('wheel', preventZoom);
-      document.removeEventListener('keydown', preventKeyboardZoom);
-    };
-  }, []);
-
-  const themeColors = isDarkMode
-    ? {
-      background: 'linear-gradient(to bottom, #00040d 0%, #002855 100%)',
-      gridOpacity: 'rgba(255, 255, 255, 0.1)',
-    }
-    : {
-      background: 'linear-gradient(to bottom, #e0f2fe 0%, #87ceeb 100%)',
-      gridOpacity: 'rgba(255, 255, 255, 0.3)',
-    };
-
-
-  // Adjusted clouds positions by making sure clouds Y start higher (reduce some baseTop to leave space)
+  const isDarkMode = useDarkMode();
   const cloudPositions = [
     useCloudFloat({ baseTop: 130, baseLeft: -12, amplitude: 25, speed: 0.8, phase: 0 }),
     useCloudFloat({ baseTop: 440, baseLeft: 22, amplitude: 35, speed: 1.1, phase: 1 }),
@@ -288,20 +395,15 @@ const AboutUsPage: React.FC = () => {
     useCloudFloat({ baseTop: 560, baseLeft: 1600, amplitude: 22, speed: 1.05, phase: 6 }),
   ];
 
-  const cloudImages = [
-    '/images/cloud1.png',
-    '/images/cloud2.png',
-    '/images/cloud1.png',
-    '/images/cloud3.png',
-    '/images/cloud3.png',
-    '/images/cloud2.png',
-    '/images/cloud1.png',
-    '/images/cloud3.png',
-    '/images/cloud2.png',
-    '/images/cloud1.png',
-  ];
+  useEffect(() => {
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.minHeight = "100vh";
+    document.documentElement.style.minHeight = "100vh";
+  }, []);
 
-  const lift = 36;
+  const lift = 80;
+  const themeColors = getThemeColors(isDarkMode);
 
   return (
     <>
@@ -309,42 +411,105 @@ const AboutUsPage: React.FC = () => {
         className="page-container"
         style={{
           backgroundImage: `
-            linear-gradient(to right, ${themeColors.gridOpacity} 1px, transparent 1px),
-            linear-gradient(to bottom, ${themeColors.gridOpacity} 1px, transparent 1px),
+            linear-gradient(to right, ${themeColors.gridOpacity1} 1px, transparent 1px),
+            linear-gradient(to bottom, ${themeColors.gridOpacity2} 1px, transparent 1px),
             ${themeColors.background}
           `,
-          backgroundSize: '30px 30px, 30px 30px, 100% 100%',
-          backgroundRepeat: 'repeat, repeat, no-repeat',
-          backgroundPosition: 'top left, top left, center',
-          userSelect: 'none',
-          touchAction: 'none',
-          overflowX: 'hidden',
-          minHeight: '100vh',
-          paddingBottom: '190px',  // <-- increased paddingBottom to avoid overlap with footer
+          backgroundSize: "30px 30px, 30px 30px, 100% 100%",
+          backgroundRepeat: "repeat, repeat, no-repeat",
+          backgroundPosition: "top left, top left, center",
+          userSelect: "none",
+          touchAction: "none",
+          overflow: "hidden",
+          minHeight: "100vh",
+          paddingBottom: "172px",
+          position: "relative",
+          transition: "background 0.5s ease",
         }}
       >
-
-
-        {cloudPositions.map((pos, idx) => (
+        {/* Stars scattered across the background */}
+        {STAR_POSITIONS.map((star, i) => (
           <Image
-            key={idx}
-            src={cloudImages[idx]}
-            alt={`Cloud ${idx + 1}`}
-            width={idx % 2 === 0 ? 355 : 204}
-            height={idx % 2 === 0 ? 228 : 125}
-            style={{ position: 'absolute', top: pos.top, left: pos.left, zIndex: 2 }}
+            key={`star-${i}`}
+            src="/images/dot.png"
+            alt=""
+            width={star.size}
+            height={star.size}
+            style={{
+              position: "absolute",
+              top: `${star.top}vh`,
+              left: `${star.left}vw`,
+              zIndex: 1,
+              pointerEvents: "none",
+              userSelect: "none",
+              opacity: themeColors.starOpacity,
+              transition: "opacity 0.5s ease",
+            }}
+          />
+        ))}
+
+        {/* Animated Clouds */}
+        {cloudPositions.map((pos, i) => (
+          <Image
+            key={i}
+            src={cloudImages[i % cloudImages.length]}
+            alt={`Cloud ${i + 1}`}
+            width={240}
+            height={156}
+            style={{
+              position: "absolute",
+              top: pos.top,
+              left: pos.left,
+              zIndex: 0,
+              pointerEvents: "none",
+              userSelect: "none",
+              opacity: 0.98,
+              transition: "top 0.18s linear",
+            }}
             priority
           />
         ))}
 
         <div className="about-heading">
-          <h1>About us</h1>
+          <h1
+            style={{
+              color: themeColors.headingColor, // Use theme color
+              textShadow: themeColors.headingTextShadow, // Use theme shadow
+              transition: "color 0.5s ease, text-shadow 0.5s ease", // Add transition
+            }}
+          >
+            About us
+          </h1>
         </div>
 
         <div className="cards-container">
-          <MysteryCard frameColor="#ffdd67" innerColor="#fff6de" dotColor="#8f6200" title="About MIC" desc="The MIC at VIT Chennai is a student-led tech community under the(MLSA) program. It’s a space where students explore and innovate with technologies like AI, Azure, and GitHub. Whether you're a beginner or a builder, we offer an inclusive platform for collaboration, curiosity, and hands-on learning through real-world experiences." style={{ marginTop: lift }} />
-          <MysteryCard frameColor="#f7a8a8" innerColor="#ffe5ed" dotColor="#a13b48" title="What we do!" desc="We host hands-on workshops, speaker sessions, and hackathons focused on Microsoft technologies like Azure, Power Platform, and Copilot. These events help students build skills, explore emerging tech, and grow into confident, well-rounded tech leaders." style={{ marginTop: 0 }} />
-          <MysteryCard frameColor="#7faee3" innerColor="#d1f1ff" dotColor="#294771" title="What you get!" desc="We focus on leadership, teamwork, and communication alongside coding. Our club supports personal and professional growth, helping members build confidence and strong networks. No matter your background, you’ll find a welcoming community that learns, creates, and grows together." style={{ marginTop: lift }} />
+          <MysteryCard
+            frameColor="#ffdd67"
+            innerColor="#fff6de"
+            dotColor="#8f6200"
+            title="About MIC"
+            desc="The MIC at VIT Chennai is a student-led tech community under the (MLSA) program. It's a space where students explore and innovate with technologies like AI, Azure, and GitHub. Whether you're a beginner or a builder, we offer an inclusive platform for collaboration, curiosity, and hands-on learning through real-world experiences."
+            style={{ marginTop: 0 }}
+            cardTextColor={themeColors.cardTextColor}
+          />
+          <MysteryCard
+            frameColor="#f7a8a8"
+            innerColor="#ffe5ed"
+            dotColor="#a13b48"
+            title="What we do!"
+            desc="We host hands-on workshops, speaker sessions, and hackathons focused on Microsoft technologies like Azure, Power Platform, and Copilot. These events help students build skills, explore emerging tech, and grow into confident, well-rounded tech leaders."
+            style={{ marginTop: lift }}
+            cardTextColor={themeColors.cardTextColor}
+          />
+          <MysteryCard
+            frameColor="#7faee3"
+            innerColor="#d1f1ff"
+            dotColor="#294771"
+            title="What you get!"
+            desc="We focus on leadership, teamwork, and communication alongside coding. Our club supports personal and professional growth, helping members build confidence and strong networks. No matter your background, you'll find a welcoming community that learns, creates, and grows together."
+            style={{ marginTop: 0 }}
+            cardTextColor={themeColors.cardTextColor}
+          />
         </div>
       </div>
 
@@ -355,14 +520,7 @@ const AboutUsPage: React.FC = () => {
           alt="Mario Footer"
           width={1512}
           height={172}
-          style={{
-            width: '100%',
-            height: 'auto',
-            display: 'block',
-            objectFit: 'cover',
-            pointerEvents: 'none',
-            userSelect: 'none',
-          }}
+          className="mario-footer-image"
           priority
         />
       </div>
@@ -370,57 +528,132 @@ const AboutUsPage: React.FC = () => {
       <style jsx>{`
         .page-container {
           position: relative;
-          width: 100%;
+          width: 100vw;
           max-width: 100vw;
-          margin: 0 auto;
+          overflow: hidden;
         }
         .about-heading {
           position: relative;
           width: 90%;
           max-width: 650px;
-          margin: 180px auto 40px auto;
+          margin: 110px auto 36px auto;
           text-align: center;
           user-select: none;
           pointer-events: none;
         }
         .about-heading h1 {
-          font-family: 'Press Start 2P', monospace;
-          color: #fff;
-          font-size: clamp(2rem, 5vw, 3.5rem);
+          font-family: "Press Start 2P", monospace;
+          font-size: clamp(2.1rem, 6vw, 3.3rem);
           letter-spacing: 2px;
-          text-shadow: 4px 4px 0 #000, 0 2px 8px #000;
           text-transform: capitalize;
           margin: 0;
           line-height: 1;
         }
         .cards-container {
           display: flex;
+          flex-direction: row;
+          flex-wrap: nowrap;
           justify-content: center;
-          align-items: flex-end;
-          flex-wrap: wrap;
-          gap: 24px;
-          padding: 0 12px;
-          margin-bottom: 48px;
+          align-items: flex-start;
+          gap: clamp(16px, 4vw, 32px);
+          width: 100%;
+          margin: 0 auto;
+          padding: 0 clamp(8px, 3vw, 10px);
+          overflow: visible;
         }
-        @media (max-width: 900px) {
-          .cards-container {
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 24px;
-          }
-          .mystery-card {
-            margin: 12px 0 !important;
-          }
-        }
-        /* Mario Footer styles */
         .mario-footer {
           position: fixed;
           left: 0;
           bottom: 0;
           width: 100vw;
-
+          height: clamp(120px, 15vh, 172px);
           pointer-events: none;
           user-select: none;
+          z-index: 10;
+          overflow: hidden;
+        }
+        :global(.mario-footer-image) {
+          width: 100vw !important;
+          height: clamp(120px, 15vh, 172px) !important;
+          display: block !important;
+          object-fit: cover !important;
+          object-position: center !important;
+          pointer-events: none !important;
+          user-select: none !important;
+        }
+
+        @media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+          .mario-footer {
+            height: clamp(80px, 8vh, 120px) !important;
+          }
+          :global(.mario-footer-image) {
+            height: clamp(80px, 8vh, 120px) !important;
+          }
+          .page-container {
+            padding-bottom: clamp(80px, 8vh, 120px) !important;
+          }
+        }
+
+        @media (min-width: 901px) and (max-width: 1200px) and (orientation: landscape) {
+          .mario-footer {
+            height: clamp(90px, 12vh, 140px) !important;
+          }
+          :global(.mario-footer-image) {
+            height: clamp(90px, 12vh, 140px) !important;
+          }
+          .page-container {
+            padding-bottom: clamp(90px, 12vh, 140px) !important;
+          }
+        }
+
+        @media (min-width: 1024px) and (max-width: 1366px) {
+          .mario-footer {
+            height: clamp(100px, 10vh, 150px) !important;
+          }
+          :global(.mario-footer-image) {
+            height: clamp(100px, 10vh, 150px) !important;
+          }
+          .page-container {
+            padding-bottom: clamp(100px, 10vh, 150px) !important;
+          }
+        }
+
+        @media (min-width: 601px) and (max-width: 1366px) {
+          .page-container {
+            padding-bottom: clamp(80px, 10vh, 150px) !important;
+            min-height: 100vh;
+          }
+        }
+
+        @media (max-width: 900px) {
+          .cards-container {
+            gap: clamp(12px, 3vw, 28px);
+          }
+        }
+
+        @media (max-width: 600px) {
+          .cards-container {
+            flex-direction: column;
+            align-items: center;
+            gap: clamp(14px, 4vw, 18px);
+            padding: 0 clamp(6px, 2vw, 10px);
+          }
+          .page-container {
+            padding-bottom: clamp(120px, 15vh, 172px) !important;
+          }
+          .about-heading {
+            margin: clamp(50px, 10vw, 80px) auto clamp(20px, 5vw, 36px) auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .about-heading h1 {
+            font-size: clamp(1.2rem, 4.5vw, 2rem);
+            letter-spacing: clamp(0.5px, 0.3vw, 1px);
+          }
+          .cards-container {
+            gap: clamp(12px, 3.5vw, 16px);
+          }
         }
       `}</style>
     </>
