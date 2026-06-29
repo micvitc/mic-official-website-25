@@ -105,7 +105,7 @@ const Cloud = memo(({
   position: { top: string | number; left: string | number };
   src: string;
   index: number;
-  view: 'board' | 'departments';
+  view: 'core' | 'board' | 'departments';
 }) => (
   <Image
     src={src}
